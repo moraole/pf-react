@@ -13,6 +13,14 @@ const SunMoon = styled.div`
   z-index: 10;
   top: 2.5vh; /* Position from the top */
   right: 10vw; /* Position from the right */
+  
+  @media (max-width: 768px) {
+
+    font-size: 4rem; /* Adjust font size for smaller devices */
+    width: 7rem; /* Further adjust the width for smaller devices */
+    height: 7rem; /* Further adjust the height for smaller devices */
+  }
+  
 `;
 const LogoLetter = styled.span`
   font-family: 'Playfair Display', serif;
@@ -34,6 +42,13 @@ const Logo = styled.div`
   height: 300px; /* Adjust the height of the square */
   border-radius: 8px;
   z-index: 500;
+  
+  @media (max-width: 768px) {
+    
+    font-size: 4rem; /* Adjust font size for smaller devices */
+    width: 10rem; /* Further adjust the width for smaller devices */
+    height: 10rem; /* Further adjust the height for smaller devices */
+  }
 `;
 
 const ELetter = styled(LogoLetter)`

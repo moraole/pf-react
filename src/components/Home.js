@@ -37,6 +37,10 @@ const MainContainer = styled.div`
   transition: background-color 0.3s, color 0.3s; /* Add transition here */
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
+  
+  @media (max-width: 768px) {
+    padding: 20px; /* Add padding for smaller screens */
+  }
 `;
 
 const NavBar = styled.nav`
@@ -52,7 +56,7 @@ const NavBar = styled.nav`
   z-index: 1;
 
   @media (max-width: 768px) {
-    padding: 5px 2px;
+    padding: 10px 20px; /* Adjust padding for smaller screens */
   }
 `;
 
@@ -83,23 +87,30 @@ const ContentContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  
+  @media (max-width: 768px) {
+    
+    width: 80%; /* Adjust width for smaller screens */
+    text=align: center;
+    align: center;
+  }
 `;
 
 
 const Title = styled.h1`
-  font-size: 4rem;
+  font-size: 3rem; /* Adjust font size for smaller screens */
   font-weight: bold;
   margin-bottom: 1.5rem;
 `;
 
 const Subtitle = styled.h2`
-  font-size: 1.8rem;
+  font-size: 1.5rem; /* Adjust font size for smaller screens */
   margin-bottom: 1rem;
   text-align: center;
 `;
 
 const BodyText = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.2rem; /* Adjust font size for smaller screens */
   line-height: 1.6;
 `;
 
