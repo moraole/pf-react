@@ -82,6 +82,7 @@ const OLetter = styled(LogoLetter)`
 
 const HeaderContent = styled.div`
   transition: background-color 0.3s, color 0.3s; /* Add transition here */
+  background-color: rgb(78, 197, 241);
   position: relative;
   display: flex;
   align-items: center;
