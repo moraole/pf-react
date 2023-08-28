@@ -32,7 +32,7 @@ const MainContainer = styled.div`
   justify-content: center;
   background-image: url(${({ backgroundImage }) => backgroundImage});
   background-size: cover;
-  background-filter: brightness(20%);
+  background-filter: brightness(100%);
   background-position: center;
   transition: background-color 0.3s, color 0.3s; /* Add transition here */
   background-color: ${({ theme }) => theme.background};
@@ -43,21 +43,18 @@ const NavBar = styled.nav`
   width: 100%;
   background-color: ${({ theme }) => (theme === lightTheme ? '#f9f9f9' : '#222')};
   padding: 20px 40px;
+  padding-right: 20px; /* Add padding to the right side */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: relative;
   top: 0;
-  left: 0;
   z-index: 1;
-  
+
   @media (max-width: 768px) {
-    padding: 10px 20px;
+    padding: 5px 2px;
   }
 `;
-
-
 
 const NavItem = styled.a`
   flex: 1;
@@ -65,19 +62,18 @@ const NavItem = styled.a`
   color: ${({ theme }) => theme.text};
   cursor: pointer;
   text-align: center;
-  padding: 10px 0; /* Add padding to make it more clickable */
+  padding: 10px 0;
 
   &:hover {
-    background-color: ${({ theme }) => (theme === lightTheme ? '#ddd' : '#555')}; /* Add hover effect */
-    border-radius: 8px; /* Add rounded corners on hover */
+    background-color: ${({ theme }) => (theme === lightTheme ? '#ddd' : '#555')};
+    border-radius: 8px;
   }
-  
-  /* Adjust text color on hover */
-  &:hover {
-    color: ${({ theme }) => (theme === lightTheme ? '#000' : '#fff')};
-  }
+
 `;
 
+const NavBlock = styled.div`
+  width: 4%
+`
 const ContentContainer = styled.div`
   width: 80%;
   margin-top: 30px;
@@ -142,6 +138,7 @@ const Home = () => {
         <NavItem href="#about">About</NavItem>
         <NavItem href="#projects">Projects</NavItem>
         <NavItem href="#contact">Contact</NavItem>
+        <NavBlock> </NavBlock>
       </NavBar>
       <MainContainer>
       <ContentContainer>

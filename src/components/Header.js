@@ -8,8 +8,8 @@ const SunMoon = styled.div`
   border-radius: 50%;
   height: 200px;
   width: 200px;
-  background: ${({ theme }) => (theme === lightTheme ? 'orange' : 'white')};
-  box-shadow: ${({ theme }) => (theme === lightTheme ? '0 0 10px orange, 0 0 60px orange, 0 0 200px orange, inset 0 0 80px orange' : '0 0 10px gray, 0 0 60px gray, 0 0 200px gray, inset 0 0 80px gray')};
+  background: ${({ theme }) => (theme === lightTheme ? '#fffb0f' : 'white')};
+  box-shadow: ${({ theme }) => (theme === lightTheme ? '0 0 10px #fffb0f, 0 0 30px #fffb0f, 0 0 100px #f9f61f, inset 0 0 10px #f9f61f' : '0 0 10px #ffffff, 0 0 60px gray, 0 0 200px gray, inset 0 0 80px gray')};
   z-index: 10;
   top: 2.5vh; /* Position from the top */
   right: 10vw; /* Position from the right */
@@ -24,7 +24,7 @@ const Logo = styled.div`
   font-family: 'Playfair Display';
   position: absolute;
   font-size: 7.5rem; 
-  background-color: ${({ theme }) => (theme === lightTheme ? '#ebebeb' : '#555')};
+  background-color: ${({ theme }) => theme.background};
   text-transform: uppercase;
   display: flex;
   flex-wrap: wrap;
@@ -82,7 +82,7 @@ const OLetter = styled(LogoLetter)`
 
 const HeaderContent = styled.div`
   transition: background-color 0.3s, color 0.3s; /* Add transition here */
-  background-color: rgb(78, 197, 241);
+  background-color: ${({ theme }) => (theme === lightTheme ? '#46dbec' : '#181e2a')};
   position: relative;
   display: flex;
   align-items: center;

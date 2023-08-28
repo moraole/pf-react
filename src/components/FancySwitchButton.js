@@ -6,6 +6,7 @@ import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const SwitchContainer = styled.label`
   position: relative;
+  right: 1%;
   display: inline-block;
   width: 60px;
   height: 34px;
