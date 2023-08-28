@@ -14,33 +14,11 @@ const SunMoon = styled.div`
   top: 2.5vh; /* Position from the top */
   right: 10vw; /* Position from the right */
 `;
-const Ray1 = styled.div`
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  color: '#f2f2f2';
-  z-index: 500;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-bottom: 87px solid #688aab;
-`
-const Ray2 = styled.div`
-`
 const LogoLetter = styled.span`
   font-family: 'Playfair Display', serif;
   user-select: none;
 `;
 
-const Triangle = styled.div`
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  color: '#f2f2f2';
-  z-index: 500;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-bottom: 87px solid #688aab;
-`;
 
 const Logo = styled.div`
   font-family: 'Playfair Display';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes, css, createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, {createGlobalStyle, ThemeProvider } from 'styled-components';
 //import backgroundImage1 from '../images/mntn1.png';
 //import backgroundImage2 from '../images/mntn2.png';
 import FancySwitchButton from './FancySwitchButton';
