@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     transition: background-color 0.3s, color 0.3s;
     margin: 0;
+    overflow-x: hidden;
   }
 `;
 const MainContainer = styled.div`
@@ -39,6 +40,7 @@ const MainContainer = styled.div`
   color: ${({ theme }) => theme.text};
   
   @media (max-width: 768px) {
+    width: 84.5vw
     padding: 20px; /* Add padding for smaller screens */
   }
 `;
@@ -56,7 +58,7 @@ const NavBar = styled.nav`
   z-index: 1;
 
   @media (max-width: 768px) {
-    padding: 10px 20px; /* Adjust padding for smaller screens */
+    width: 84.5vw;
   }
 `;
 
@@ -72,7 +74,9 @@ const NavItem = styled.a`
     background-color: ${({ theme }) => (theme === lightTheme ? '#ddd' : '#555')};
     border-radius: 8px;
   }
-
+  @media (max-width: 768px) {
+    width: 20%;
+  }
 `;
 
 const NavBlock = styled.div`

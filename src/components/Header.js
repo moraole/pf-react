@@ -103,6 +103,7 @@ const HeaderContent = styled.div`
   align-items: center;
   justify-content: center;
   height: 40vh;
+  width: 100%;
 `;
 
 const Header = ({ isDarkMode }) => {
