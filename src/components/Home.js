@@ -6,9 +6,6 @@ import FancySwitchButton from './FancySwitchButton';
 import Header from './Header.js';
 import lightTheme from '../themes/lightTheme';
 import darkTheme from '../themes/darkTheme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun } from '@fortawesome/free-solid-svg-icons';
-import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -92,19 +89,6 @@ const ContentContainer = styled.div`
   text-align: center;
 `;
 
-const Accessibility = styled.div`
-  position: fixed;
-  align-items: left;
-  align: left;
-  
-  
-`
-
-const FAIcon = styled(FontAwesomeIcon)`
-  font-size: 8rem;
-  color: yellow;
-  left: 100px;
-`
 
 const Title = styled.h1`
   font-size: 4rem;
@@ -152,9 +136,6 @@ const Home = () => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
-      {/* <Accessibility> 
-        {isDarkMode ? <FontAwesomeIcon icon={faMoon} style={{ fontSize: '8rem'}} /> : <FAIcon icon={faSun} />}
-      </Accessibility> */}
       <Header isDarkMode={isDarkMode} />
       <NavBar>
         <FancySwitchButton isOn={isDarkMode} onToggle={toggleDarkMode} />
