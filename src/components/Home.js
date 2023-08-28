@@ -8,6 +8,7 @@ import lightTheme from '../themes/lightTheme';
 import darkTheme from '../themes/darkTheme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -96,6 +97,13 @@ const Accessibility = styled.div`
   align-items: left;
   align: left;
   
+  
+`
+
+const FAIcon = styled(FontAwesomeIcon)`
+  font-size: 8rem;
+  color: yellow;
+  left: 100px;
 `
 
 const Title = styled.h1`
@@ -144,11 +152,12 @@ const Home = () => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
-      <Accessibility> 
-        <FontAwesomeIcon icon={faSun} />
-      </Accessibility>
+      {/* <Accessibility> 
+        {isDarkMode ? <FontAwesomeIcon icon={faMoon} style={{ fontSize: '8rem'}} /> : <FAIcon icon={faSun} />}
+      </Accessibility> */}
       <Header isDarkMode={isDarkMode} />
       <NavBar>
+        <FancySwitchButton isOn={isDarkMode} onToggle={toggleDarkMode} />
         <NavItem href="#about">About</NavItem>
         <NavItem href="#projects">Projects</NavItem>
         <NavItem href="#contact">Contact</NavItem>
@@ -168,7 +177,7 @@ const Home = () => {
             tristique. Suspendisse in enim euismod, vestibulum ex vitae, malesuada
             dui. Nulla facilisi. Cras volutpat dui at efficitur finibus.
           </BodyText>
-          <FancySwitchButton isOn={isDarkMode} onToggle={toggleDarkMode} />
+          
         </ContentContainer >
       </MainContainer>
     </ThemeProvider>
