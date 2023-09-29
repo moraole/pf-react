@@ -3,75 +3,49 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
+import lightTheme from '../themes/lightTheme';
+import darkTheme from '../themes/darkTheme';
 
-const SwitchContainer = styled.label`
+const Button = styled.button`
   position: relative;
-  right: 1%;
   display: inline-block;
   width: 60px;
   height: 34px;
-`;
-
-const SwitchInput = styled.input`
-  opacity: 0;
-  width: 0;
-  height: 0;
-
-  &:checked + .Slider {
-    background-color: #2196F3;
-  }
-
-  &:checked + .Slider:before {
-    transform: translateX(26px);
-  }
-`;
-
-const Slider = styled.span`
-  position: absolute;
+  background-color: ${({ isOn }) => (isOn ? 'rgb(205, 205, 205, 0)' : 'rgb(205, 205, 205, 0)')}; /* No background color change */
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-
-
-  }
+  transition: background-color 0s;
+  outline-style: solid;
+  outline-width: 0.1px;
+  outline-color: ${({ isOn }) => (isOn ? 'rgba(255, 255, 255,0.2)' : 'black')};
+  border: 200px;
+  user-select: none;
 `;
 
 const Icon = styled.span`
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the icon vertically and horizontally */
   font-size: 16px;
-  color: ${({ isOn }) => (isOn ? '#7a88ff' : '#140000')};
-  transition: 0.4s;
+  color: ${({ isOn }) => (isOn ? '#fff' : '#333')}; /* Adjusted color for better visibility */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px; /* Set the width to match the size of the slider circle */
-  height: 30px; /* Set the height to match the size of the slider circle */
-  border-radius: 50%;
-  background-color: white;
-  z-index: 1;
-  left: ${({ isOn }) => (isOn ? 'calc(100% - 56%)' : '4px')}; /* Adjust left positioning */
+  align-items: center; /* Center the icon vertically */
+  justify-content: center; /* Center the icon horizontally */
+  width: 30px;
+  height: 30px;
 `;
 
 const IconSymbol = styled(FontAwesomeIcon)`
-  font-size: 14px; /* Adjust the size to match the slider circle */
+  font-size: 14px;
 `;
 
 const FancySwitchButton = ({ isOn, onToggle }) => {
   return (
-    <SwitchContainer>
-      <SwitchInput type="checkbox" checked={isOn} onChange={onToggle} />
-      <Slider className="Slider" />
+    <Button isOn={isOn} onClick={onToggle}>
       <Icon isOn={isOn}>
         <IconSymbol icon={isOn ? faMoon : faSun} />
       </Icon>
-    </SwitchContainer>
+    </Button>
   );
 };
 

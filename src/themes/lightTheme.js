@@ -1,5 +1,5 @@
 const lightTheme = {
-    background: '#cdcdcd', 
+    background: 'rgb(205, 205, 205, 0)', 
     text: '#333', 
 };
 
