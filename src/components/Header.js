@@ -137,33 +137,156 @@ const ExpandedText = styled.span`
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 `;
+const ProjectMenuItem = styled.a`
+  text-decoration: none;
+  color: ${({ theme }) => theme.text};
+  font-size: 16px;
+  height: 30px;
+  margin: 5px 0;
+  transition: color 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 0.1px;
+  &:hover {
+    color: ${({ theme }) => theme.accent};
+  }
+`;
 
+const ProjectDescription = styled.div`
+  position: absolute;
+  left: 100%; /* Position to the left of the menu item */
+  top: 0;
+  width: 200px; /* Adjust the width as needed */
+  background-color: ${({ theme }) => theme.background};
+  border: 2px solid ${({ theme }) => theme.text};
+  border-radius: 5px;
+  padding: 10px;
+  display: none;
+  z-index: 1000;
+  
+`;
+
+const ProjectMenu = styled.div`
+  position: absolute;
+  top: 70%;
+  right: 10%;
+  transform: translateY(50%);
+  background-color: ${({ theme }) => theme.background};
+  border: 2px solid ${({ theme }) => theme.text};
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  ${ProjectMenuItem}:hover + ${ProjectDescription} {
+    display: block;
+  }
+`;
+const Project1Description = styled(ProjectDescription)`
+  
+`;
+
+const Project2Description = styled(ProjectDescription)`
+  transform: translateY(30px);
+`;
+
+const Project3Description = styled(ProjectDescription)`
+  transform: translateY(60px);
+`;
+const RadialGradient = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: radial-gradient(
+    ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 10%, transparent
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+  transition: top 15.5s, left 1.5s; /* Add transition for smooth movement */
+
+  /* Add the following JavaScript to set the top and left properties */
+  top: ${({ cursorPos }) => cursorPos.y}px;
+  left: ${({ cursorPos }) => cursorPos.x}px;
+`;
+
+const HeaderContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+`;
 const Header = ({ isDarkMode }) => {
   const [hoveredE1, setHoveredE1] = useState(false);
   const [hoveredE2, setHoveredE2] = useState(false);
   const [hoveredM, setHoveredM] = useState(false);
   const [hoveredO, setHoveredO] = useState(false);
-
+  const [hovering, setHovering] = useState(false);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  
   // Define a function to check if the device is a phone based on screen width
   const isPhone = window.innerWidth <= 768; // Adjust the breakpoint as needed
+  const handleMouseEnter = () => {
+    setHovering(true);
+  };
 
+  const handleMouseLeave = () => {
+    setHovering(false);
+  };
+
+  const handleMouseMove = (e) => {
+    // Add a slight delay (e.g., 100 milliseconds) to update the position
+    setTimeout(() => {
+      setCursorPos({ x: e.clientX, y: e.clientY });
+    }, 0);
+  };
+  
   return (
+    <HeaderContainer
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+    >
+      {hovering && (
+        <RadialGradient
+          cursorPos={cursorPos} // Pass the cursor position as a prop
+          style={{
+            top: `${cursorPos.y}px`, // Use cursor position for initial position
+            left: `${cursorPos.x}px`, // Use cursor position for initial position
+          }}
+        />
+      )}
     <Border>
       <HeaderContent>
         {isDarkMode ? (
           <>
             <Moon />
+            <ProjectMenu>
+              <ProjectMenuItem href="#project1">Project 1</ProjectMenuItem>
+              <Project1Description>Project 1 Description</Project1Description>
+              <ProjectMenuItem href="#project2">Project 2</ProjectMenuItem>
+              <Project2Description>Project 2 Description</Project2Description>
+              <ProjectMenuItem href="#project3">Project 3</ProjectMenuItem>
+              <Project3Description>Project 3 Description</Project3Description>
+            </ProjectMenu>
           </>
         ) : (
-          // Light mode components
           <>
-            
+              <ProjectMenu>
+                <ProjectMenuItem href="#project1">Project 1</ProjectMenuItem>
+                <Project1Description>Project 1 Description</Project1Description>
+                <ProjectMenuItem href="#project2">Project 2</ProjectMenuItem>
+                <Project2Description>Project 2 Description</Project2Description>
+                <ProjectMenuItem href="#project3">Project 3</ProjectMenuItem>
+                <Project3Description>Project 3 Description</Project3Description>
+              </ProjectMenu>
           </>
         )}
         <StarsBackground isDarkMode={isDarkMode} />
         <Logo>
           <ExpandableLetter
-            isPhone={isPhone} // Pass the isPhone prop
+            isPhone={isPhone}
             onMouseEnter={() => setHoveredE1(true)}
             onMouseLeave={() => setHoveredE1(false)}
           >
@@ -194,6 +317,7 @@ const Header = ({ isDarkMode }) => {
         </Logo>
       </HeaderContent>
     </Border>
+    </HeaderContainer>
   );
 };
 
