@@ -1,9 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import StarsBackground from './StarsBackground';
 import lightTheme from '../themes/lightTheme';
-import City from './City';
-import FancySwitchButton from './FancySwitchButton';
+const RadialGradient = styled.div`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 40%,
+    ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 40%,
+    ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 100%
+  );
+  clip-path: polygon(
+    50% 0%,
+    61.8% 38.2%,
+    100% 50%,
+    61.8% 61.8%,
+    50% 100%,
+    38.2% 61.8%,
+    0% 50%,
+    38.2% 38.2%
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+  animation: glowing 1s infinite alternate;
+  transition: transform 0.3s ease;
+  transform: ${({ projectMenuHovered }) => (projectMenuHovered ? 'scale(1.0)' : 'scale(1.0')};
+  @keyframes glowing {
+    0% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Add the hover effect */
+  &:hover {
+    transform: scale(0.5);
+  }
+`;
 
 const Moon = styled.div`
   position: absolute;
@@ -180,8 +219,12 @@ const ProjectMenu = styled.div`
   flex-direction: column;
   align-items: center;
   z-index: 1000;
-  ${ProjectMenuItem}:hover + ${ProjectDescription} {
-    display: block;
+
+  /* Apply the hover effect to ProjectMenu */
+  &:hover {
+    ${RadialGradient} {
+      transform: scale(1.5);
+    }
   }
 `;
 const Project1Description = styled(ProjectDescription)`
@@ -195,23 +238,7 @@ const Project2Description = styled(ProjectDescription)`
 const Project3Description = styled(ProjectDescription)`
   transform: translateY(60px);
 `;
-const RadialGradient = styled.div`
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
-  background: radial-gradient(
-    ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 10%, transparent
-  );
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 10000;
-  transition: top 15.5s, left 1.5s; /* Add transition for smooth movement */
 
-  /* Add the following JavaScript to set the top and left properties */
-  top: ${({ cursorPos }) => cursorPos.y}px;
-  left: ${({ cursorPos }) => cursorPos.x}px;
-`;
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -224,9 +251,10 @@ const Header = ({ isDarkMode }) => {
   const [hoveredO, setHoveredO] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  
-  // Define a function to check if the device is a phone based on screen width
-  const isPhone = window.innerWidth <= 768; // Adjust the breakpoint as needed
+  const [projectMenuHovered, setProjectMenuHovered] = useState(false);
+
+  const isPhone = window.innerWidth <= 768;
+
   const handleMouseEnter = () => {
     setHovering(true);
   };
@@ -236,12 +264,37 @@ const Header = ({ isDarkMode }) => {
   };
 
   const handleMouseMove = (e) => {
-    // Add a slight delay (e.g., 100 milliseconds) to update the position
-    setTimeout(() => {
-      setCursorPos({ x: e.clientX, y: e.clientY });
-    }, 0);
+    setCursorPos({ x: e.clientX, y: e.clientY });
   };
+
+
+  useEffect(() => {
+    document.addEventListener('mouseenter', handleMouseEnter);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mousemove', handleMouseMove);
+
+    // Add event listeners for project menu hover
+    document.addEventListener('mouseenter', handleProjectMenuEnter);
+    document.addEventListener('mouseleave', handleProjectMenuLeave);
+
+    return () => {
+      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mousemove', handleMouseMove);
+
+      // Remove event listeners for project menu hover
+      document.removeEventListener('mouseenter', handleProjectMenuEnter);
+      document.removeEventListener('mouseleave', handleProjectMenuLeave);
+    };
+  }, []);
   
+  const handleProjectMenuEnter = () => {
+    setProjectMenuHovered(true); // Set project menu hover state to true
+  };
+
+  const handleProjectMenuLeave = () => {
+    setProjectMenuHovered(false); // Set project menu hover state to false
+  };
   return (
     <HeaderContainer
       onMouseEnter={handleMouseEnter}
@@ -250,29 +303,19 @@ const Header = ({ isDarkMode }) => {
     >
       {hovering && (
         <RadialGradient
-          cursorPos={cursorPos} // Pass the cursor position as a prop
+          cursorPos={cursorPos}
+          projectMenuHovered={projectMenuHovered}
           style={{
-            top: `${cursorPos.y}px`, // Use cursor position for initial position
-            left: `${cursorPos.x}px`, // Use cursor position for initial position
+            top: `${cursorPos.y-10}px`,
+            left: `${cursorPos.x-10}px`,
           }}
         />
       )}
-    <Border>
-      <HeaderContent>
-        {isDarkMode ? (
-          <>
-            <Moon />
-            <ProjectMenu>
-              <ProjectMenuItem href="#project1">Project 1</ProjectMenuItem>
-              <Project1Description>Project 1 Description</Project1Description>
-              <ProjectMenuItem href="#project2">Project 2</ProjectMenuItem>
-              <Project2Description>Project 2 Description</Project2Description>
-              <ProjectMenuItem href="#project3">Project 3</ProjectMenuItem>
-              <Project3Description>Project 3 Description</Project3Description>
-            </ProjectMenu>
-          </>
-        ) : (
-          <>
+      <Border>
+        <HeaderContent>
+          {isDarkMode ? (
+            <>
+              <Moon />
               <ProjectMenu>
                 <ProjectMenuItem href="#project1">Project 1</ProjectMenuItem>
                 <Project1Description>Project 1 Description</Project1Description>
@@ -281,44 +324,57 @@ const Header = ({ isDarkMode }) => {
                 <ProjectMenuItem href="#project3">Project 3</ProjectMenuItem>
                 <Project3Description>Project 3 Description</Project3Description>
               </ProjectMenu>
-          </>
-        )}
-        <StarsBackground isDarkMode={isDarkMode} />
-        <Logo>
-          <ExpandableLetter
-            isPhone={isPhone}
-            onMouseEnter={() => setHoveredE1(true)}
-            onMouseLeave={() => setHoveredE1(false)}
-          >
-            E
-            <ExpandedText style={{ opacity: hoveredE1 ? 1 : 0 }}>rick</ExpandedText>
-          </ExpandableLetter>
-          <ExpandableLetter
-            onMouseEnter={() => setHoveredE2(true)}
-            onMouseLeave={() => setHoveredE2(false)}
-          >
-            E
-            <ExpandedText style={{ opacity: hoveredE2 ? 1 : 0 }}>mmanuel</ExpandedText>
-          </ExpandableLetter>
-          <ExpandableLetter
-            onMouseEnter={() => setHoveredM(true)}
-            onMouseLeave={() => setHoveredM(false)}
-          >
-            M
-            <ExpandedText style={{ opacity: hoveredM ? 1 : 0 }}>ora</ExpandedText>
-          </ExpandableLetter>
-          <ExpandableLetter
-            onMouseEnter={() => setHoveredO(true)}
-            onMouseLeave={() => setHoveredO(false)}
-          >
-            O
-            <ExpandedText style={{ opacity: hoveredO ? 1 : 0 }}>lmedo</ExpandedText>
-          </ExpandableLetter>
-        </Logo>
-      </HeaderContent>
-    </Border>
+            </>
+          ) : (
+            <>
+              <ProjectMenu>
+                <ProjectMenuItem href="#project1">Project 1</ProjectMenuItem>
+                <Project1Description>Project 1 Description</Project1Description>
+                <ProjectMenuItem href="#project2">Project 2</ProjectMenuItem>
+                <Project2Description>Project 2 Description</Project2Description>
+                <ProjectMenuItem href="#project3">Project 3</ProjectMenuItem>
+                <Project3Description>Project 3 Description</Project3Description>
+              </ProjectMenu>
+            </>
+          )}
+          <StarsBackground isDarkMode={isDarkMode} />
+          <Logo>
+            {/* Apply the shrink effect to RadialGradient when project menu is hovered */}
+            <ExpandableLetter
+              isPhone={isPhone}
+              onMouseEnter={() => setHoveredE1(true)}
+              onMouseLeave={() => setHoveredE1(false)}
+            >
+              E
+              <ExpandedText style={{ opacity: hoveredE1 ? 1 : 0 }}>rick</ExpandedText>
+            </ExpandableLetter>
+            <ExpandableLetter
+              onMouseEnter={() => setHoveredE2(true)}
+              onMouseLeave={() => setHoveredE2(false)}
+            >
+              E
+              <ExpandedText style={{ opacity: hoveredE2 ? 1 : 0 }}>mmanuel</ExpandedText>
+            </ExpandableLetter>
+            <ExpandableLetter
+              onMouseEnter={() => setHoveredM(true)}
+              onMouseLeave={() => setHoveredM(false)}
+            >
+              M
+              <ExpandedText style={{ opacity: hoveredM ? 1 : 0 }}>ora</ExpandedText>
+            </ExpandableLetter>
+            <ExpandableLetter
+              onMouseEnter={() => setHoveredO(true)}
+              onMouseLeave={() => setHoveredO(false)}
+            >
+              O
+              <ExpandedText style={{ opacity: hoveredO ? 1 : 0 }}>lmedo</ExpandedText>
+            </ExpandableLetter>
+          </Logo>
+        </HeaderContent>
+      </Border>
     </HeaderContainer>
   );
 };
 
 export default Header;
+

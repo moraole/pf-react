@@ -38,8 +38,11 @@ const FancySwitchButtonWrapper = styled.div`
 `;
 
 const Home = () => {
+  // Check if dark mode is stored in localStorage, or set it to true by default
   const storedDarkMode = localStorage.getItem('darkMode');
-  const [isDarkMode, setIsDarkMode] = useState(storedDarkMode === 'true');
+  const initialDarkMode = storedDarkMode === 'true' || storedDarkMode === null;
+
+  const [isDarkMode, setIsDarkMode] = useState(initialDarkMode);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -54,12 +57,8 @@ const Home = () => {
       <GlobalStyles />
       {<StarsBackground isDarkMode={isDarkMode} />}
       <MainContainer>
-        
         <ContentWrapper>
-          
-          <Header isDarkMode={isDarkMode}>
-          
-          </Header>
+          <Header isDarkMode={isDarkMode}></Header>
         </ContentWrapper>
         <FancySwitchButtonWrapper>
           <FancySwitchButton isOn={isDarkMode} onToggle={toggleDarkMode} />
