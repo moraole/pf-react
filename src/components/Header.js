@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import StarsBackground from './StarsBackground';
 import lightTheme from '../themes/lightTheme';
+import darkTheme from '../themes/darkTheme';
+import Project1 from './Project1';
+import Project2 from './Project2';
 const RadialGradient = styled.div`
   position: absolute;
   width: 20px;
@@ -9,26 +12,20 @@ const RadialGradient = styled.div`
   background: radial-gradient(
     ellipse at center,
     transparent 0%,
-    transparent 40%,
+    transparent 0%,
     ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 40%,
     ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 100%
   );
-  clip-path: polygon(
-    50% 0%,
-    61.8% 38.2%,
-    100% 50%,
-    61.8% 61.8%,
-    50% 100%,
-    38.2% 61.8%,
-    0% 50%,
-    38.2% 38.2%
-  );
+  clip-path: ${({ projectMenuHovered }) =>
+    projectMenuHovered
+      ? 'circle(10px at center)'
+      : 'polygon(50% 0%, 61.8% 38.2%, 100% 50%, 61.8% 61.8%, 50% 100%, 38.2% 61.8%, 0% 50%, 38.2% 38.2%)'};
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 10000;
   animation: glowing 1s infinite alternate;
   transition: transform 0.3s ease;
-  transform: ${({ projectMenuHovered }) => (projectMenuHovered ? 'scale(1.0)' : 'scale(1.0')};
+  transform: ${({ projectMenuHovered }) => (projectMenuHovered ? 'scale(1.0)' : 'scale(2.0)')};
   @keyframes glowing {
     0% {
       opacity: 0.7;
@@ -37,12 +34,8 @@ const RadialGradient = styled.div`
       opacity: 1;
     }
   }
-
-  /* Add the hover effect */
-  &:hover {
-    transform: scale(0.5);
-  }
 `;
+
 
 const Moon = styled.div`
   position: absolute;
@@ -68,21 +61,21 @@ const Logo = styled.div`
   background-color: ${({ theme }) => theme.background};
   text-transform: uppercase;
   display: flex;
-  flex-direction: column; /* Stack the letters vertically */
-  justify-content: space-between; /* Evenly space the rows */
-  align-items: center; /* Center horizontally */
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 300px;
   height: 95vh;
   left: 0;
   top: 0;
   z-index: 500;
   border-radius: 8px;
-  padding: 20px; /* Add padding to space out the letters from the edges */
+  padding: 20px;
 `;
 
 const Row = styled.div`
   display: flex;
-  justify-content: space-between; /* Evenly space the letters in each row */
+  justify-content: space-between;
   width: 100%;
 `;
 
@@ -94,7 +87,7 @@ const ELetter = styled(LogoLetter)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ isPhone }) => (isPhone ? 'black' : 'white')}; // Conditional color based on isPhone
+  color: ${({ isPhone }) => (isPhone ? 'black' : 'white')};
 `;
 
 const SecondELetter = styled(LogoLetter)`
@@ -131,12 +124,11 @@ const OLetter = styled(LogoLetter)`
   color: white;
 `;
 
-// Modify the gradient background for light mode
 const HeaderContent = styled.div`
   overflow: hidden;
-  transition: background-color 0.3s, color 0.3s; /* Add transition here */
+  transition: background-color 0.3s, color 0.3s;
   background: ${({ theme }) =>
-    theme === lightTheme ? 'white' /* Gradient background for light mode */ : '#181e2a'};
+    theme === lightTheme ? 'white' : '#181e2a'};
   position: relative;
   display: flex;
   align-items: center;
@@ -153,7 +145,6 @@ const Border = styled.div`
 const ExpandableLetter = styled.span`
   position: relative;
   cursor: pointer;
-  ${({isPhone}) => isPhone ? 'color: black;' : ''}
 
   &:hover span:last-child {
     font-size: 40px;
@@ -176,6 +167,7 @@ const ExpandedText = styled.span`
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 `;
+
 const ProjectMenuItem = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.text};
@@ -187,6 +179,7 @@ const ProjectMenuItem = styled.a`
   display: flex;
   align-items: center;
   border-bottom: solid 0.1px;
+
   &:hover {
     color: ${({ theme }) => theme.accent};
   }
@@ -194,16 +187,15 @@ const ProjectMenuItem = styled.a`
 
 const ProjectDescription = styled.div`
   position: absolute;
-  left: 100%; /* Position to the left of the menu item */
+  left: 100%;
   top: 0;
-  width: 200px; /* Adjust the width as needed */
+  width: 200px;
   background-color: ${({ theme }) => theme.background};
   border: 2px solid ${({ theme }) => theme.text};
   border-radius: 5px;
   padding: 10px;
   display: none;
-  z-index: 1000;
-  
+  z-index: 10000;
 `;
 
 const ProjectMenu = styled.div`
@@ -218,32 +210,26 @@ const ProjectMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1000;
+  z-index: 10;
+  `;
 
-  /* Apply the hover effect to ProjectMenu */
-  &:hover {
-    ${RadialGradient} {
-      transform: scale(1.5);
-    }
-  }
-`;
 const Project1Description = styled(ProjectDescription)`
-  
+  transform: translateY(-30px);
 `;
 
 const Project2Description = styled(ProjectDescription)`
-  transform: translateY(30px);
+  transform: translateY(0);
 `;
 
 const Project3Description = styled(ProjectDescription)`
-  transform: translateY(60px);
+  transform: translateY(30px);
 `;
-
 
 const HeaderContainer = styled.div`
   position: relative;
   overflow: hidden;
 `;
+
 const Header = ({ isDarkMode }) => {
   const [hoveredE1, setHoveredE1] = useState(false);
   const [hoveredE2, setHoveredE2] = useState(false);
@@ -252,6 +238,9 @@ const Header = ({ isDarkMode }) => {
   const [hovering, setHovering] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [projectMenuHovered, setProjectMenuHovered] = useState(false);
+  const [projectDescriptionsVisible, setProjectDescriptionsVisible] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const isPhone = window.innerWidth <= 768;
 
@@ -267,34 +256,49 @@ const Header = ({ isDarkMode }) => {
     setCursorPos({ x: e.clientX, y: e.clientY });
   };
 
+  const handleProjectItemClick = (projectName) => {
+    setSelectedProject(projectName);
+    setProjectDescriptionsVisible(true); // Add this line
+    setIsVisible(true);
+  };
 
   useEffect(() => {
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mousemove', handleMouseMove);
 
-    // Add event listeners for project menu hover
-    document.addEventListener('mouseenter', handleProjectMenuEnter);
-    document.addEventListener('mouseleave', handleProjectMenuLeave);
-
     return () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mousemove', handleMouseMove);
-
-      // Remove event listeners for project menu hover
-      document.removeEventListener('mouseenter', handleProjectMenuEnter);
-      document.removeEventListener('mouseleave', handleProjectMenuLeave);
     };
   }, []);
-  
-  const handleProjectMenuEnter = () => {
-    setProjectMenuHovered(true); // Set project menu hover state to true
-  };
+// Inside your Header.js
+useEffect(() => {
+  document.addEventListener('mouseenter', handleMouseEnter);
+  document.addEventListener('mouseleave', handleMouseLeave);
+  document.addEventListener('mousemove', handleMouseMove);
 
-  const handleProjectMenuLeave = () => {
-    setProjectMenuHovered(false); // Set project menu hover state to false
+  return () => {
+    document.removeEventListener('mouseenter', handleMouseEnter);
+    document.removeEventListener('mouseleave', handleMouseLeave);
+    document.removeEventListener('mousemove', handleMouseMove);
   };
+}, []);
+
+// Add this useEffect to control the animations
+useEffect(() => {
+  const projectDescriptions = document.querySelectorAll('.project-description');
+  if (projectDescriptionsVisible) {
+    projectDescriptions.forEach((desc) => {
+      desc.classList.add('slide-in-active');
+    });
+  } else {
+    projectDescriptions.forEach((desc) => {
+      desc.classList.remove('slide-in-active');
+    });
+  }
+}, [projectDescriptionsVisible]);
   return (
     <HeaderContainer
       onMouseEnter={handleMouseEnter}
@@ -303,11 +307,11 @@ const Header = ({ isDarkMode }) => {
     >
       {hovering && (
         <RadialGradient
-          cursorPos={cursorPos}
           projectMenuHovered={projectMenuHovered}
+          cursorPos={cursorPos}
           style={{
-            top: `${cursorPos.y-10}px`,
-            left: `${cursorPos.x-10}px`,
+            top: `${cursorPos.y - 10}px`,
+            left: `${cursorPos.x - 10}px`,
           }}
         />
       )}
@@ -316,30 +320,61 @@ const Header = ({ isDarkMode }) => {
           {isDarkMode ? (
             <>
               <Moon />
-              <ProjectMenu>
-                <ProjectMenuItem href="#project1">Project 1</ProjectMenuItem>
-                <Project1Description>Project 1 Description</Project1Description>
-                <ProjectMenuItem href="#project2">Project 2</ProjectMenuItem>
-                <Project2Description>Project 2 Description</Project2Description>
-                <ProjectMenuItem href="#project3">Project 3</ProjectMenuItem>
-                <Project3Description>Project 3 Description</Project3Description>
+              <ProjectMenu
+                onMouseEnter={() => setProjectMenuHovered(true)}
+                onMouseLeave={() => setProjectMenuHovered(false)}
+              >
+                <ProjectMenuItem onClick={() =>  handleProjectItemClick('project1')}>
+                  Project 1
+                </ProjectMenuItem>
+                <Project1Description className="project-description slide-in">
+  Project 1 Description
+</Project1Description>
+                <ProjectMenuItem onClick={() =>  handleProjectItemClick('project2')}>
+                  Project 2
+                </ProjectMenuItem>
+                {projectDescriptionsVisible && (
+                  <Project2Description>Project 2 Description</Project2Description>
+                )}
+                <ProjectMenuItem href="#project3" onClick={handleProjectItemClick}>
+                  Project 3
+                </ProjectMenuItem>
+                {projectDescriptionsVisible && (
+                  <Project3Description>Project 3 Description</Project3Description>
+                )}
+                
               </ProjectMenu>
+
             </>
           ) : (
             <>
-              <ProjectMenu>
-                <ProjectMenuItem href="#project1">Project 1</ProjectMenuItem>
-                <Project1Description>Project 1 Description</Project1Description>
-                <ProjectMenuItem href="#project2">Project 2</ProjectMenuItem>
-                <Project2Description>Project 2 Description</Project2Description>
-                <ProjectMenuItem href="#project3">Project 3</ProjectMenuItem>
-                <Project3Description>Project 3 Description</Project3Description>
+              <ProjectMenu
+                onMouseEnter={() => setProjectMenuHovered(true)}
+                onMouseLeave={() => setProjectMenuHovered(false)}
+              >
+                <ProjectMenuItem href="#project1" onClick={handleProjectItemClick}>
+                  Project 1
+                </ProjectMenuItem>
+                {projectDescriptionsVisible && (
+                  <Project1Description>Project 1 Description</Project1Description>
+                )}
+                <ProjectMenuItem href="#project2" onClick={handleProjectItemClick}>
+                  Project 2
+                </ProjectMenuItem>
+                {projectDescriptionsVisible && (
+                  <Project2Description>Project 2 Description</Project2Description>
+                )}
+                <ProjectMenuItem href="#project3" onClick={handleProjectItemClick}>
+                  Project 3
+                </ProjectMenuItem>
+                {projectDescriptionsVisible && (
+                  <Project3Description>Project 3 Description</Project3Description>
+                )}
               </ProjectMenu>
             </>
           )}
           <StarsBackground isDarkMode={isDarkMode} />
           <Logo>
-            {/* Apply the shrink effect to RadialGradient when project menu is hovered */}
             <ExpandableLetter
               isPhone={isPhone}
               onMouseEnter={() => setHoveredE1(true)}
@@ -372,9 +407,12 @@ const Header = ({ isDarkMode }) => {
           </Logo>
         </HeaderContent>
       </Border>
+      {isVisible ? <Project1 /> : null}
+
+      
     </HeaderContainer>
+    
   );
 };
 
 export default Header;
-
