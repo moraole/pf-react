@@ -78,57 +78,6 @@ const Logo = styled.div`
   padding: 20px;
 `;
 
-const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const ELetter = styled(LogoLetter)`
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ isPhone }) => (isPhone ? 'black' : 'white')};
-`;
-
-const SecondELetter = styled(LogoLetter)`
-  width: 50%;
-  height: 50%;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-`;
-
-const MLetter = styled(LogoLetter)`
-  width: 50%;
-  height: 50%;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-`;
-
-const OLetter = styled(LogoLetter)`
-  width: 50%;
-  height: 50%;
-  font-family: 'Playfair Display';
-  bottom: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-`;
-
 const HeaderContent = styled.div`
   overflow: hidden;
   transition: background-color 0.3s, color 0.3s;
