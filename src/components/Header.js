@@ -9,20 +9,25 @@ const RadialGradient = styled.div`
   position: absolute;
   width: 20px;
   height: 20px;
+
+  /* Change the background color to red when projectHovered is true */
   background: radial-gradient(
     ellipse at center,
     transparent 0%,
     transparent 0%,
-    ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 40%,
-    ${({ theme }) => (theme === lightTheme ? 'black' : 'white')} 100%
+    ${({ projectHovered, isDarkMode }) =>
+      projectHovered ? 'red' : isDarkMode ? 'white' : 'black'} 40%,
+    ${({ projectHovered, isDarkMode }) =>
+      projectHovered ? 'red' : isDarkMode ? 'white' : 'black'} 100%
   );
+
   clip-path: ${({ projectMenuHovered }) =>
     projectMenuHovered
       ? 'circle(10px at center)'
       : 'polygon(50% 0%, 61.8% 38.2%, 100% 50%, 61.8% 61.8%, 50% 100%, 38.2% 61.8%, 0% 50%, 38.2% 38.2%)'};
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 10000;
+  z-index: 1000;
   animation: glowing 1s infinite alternate;
   transition: transform 0.3s ease;
   transform: ${({ projectMenuHovered }) => (projectMenuHovered ? 'scale(1.0)' : 'scale(2.0)')};
@@ -229,7 +234,9 @@ const HeaderContainer = styled.div`
   position: relative;
   overflow: hidden;
 `;
+const ProjectContainer = styled.div`
 
+`
 const Header = ({ isDarkMode }) => {
   const [hoveredE1, setHoveredE1] = useState(false);
   const [hoveredE2, setHoveredE2] = useState(false);
@@ -241,7 +248,7 @@ const Header = ({ isDarkMode }) => {
   const [projectDescriptionsVisible, setProjectDescriptionsVisible] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-
+  const [projectHovered, setProjectHovered] =useState(false);
   const isPhone = window.innerWidth <= 768;
 
   const handleMouseEnter = () => {
@@ -307,7 +314,9 @@ useEffect(() => {
     >
       {hovering && (
         <RadialGradient
+          isDarkMode={isDarkMode}
           projectMenuHovered={projectMenuHovered}
+          projectHovered={projectHovered}
           cursorPos={cursorPos}
           style={{
             top: `${cursorPos.y - 10}px`,
@@ -407,8 +416,12 @@ useEffect(() => {
           </Logo>
         </HeaderContent>
       </Border>
-      {isVisible ? <Project1 /> : null}
-
+      <ProjectContainer
+        onMouseEnter={() => setProjectHovered(true)}
+        onMouseLeave={() => setProjectHovered(false)}
+      >
+      {isVisible ? <Project1 isVisible={false} /> : null}
+      </ProjectContainer>
       
     </HeaderContainer>
     

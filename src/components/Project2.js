@@ -10,7 +10,7 @@ const ProjectContainer = styled.div`
     background-color: blue;
     transform: translateY(100%); // Start off-screen
     transition: transform 1s ease, background-color .3s ease; // Different durations
-    z-index: 10;
+    z-index: 1000000;
 
     &.slide-in {
         transform: translateY(0); // Slide in from the bottom
