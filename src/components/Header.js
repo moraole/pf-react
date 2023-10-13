@@ -5,32 +5,34 @@ import lightTheme from '../themes/lightTheme';
 import darkTheme from '../themes/darkTheme';
 import Project1 from './Project1';
 import Project2 from './Project2';
+import { isVisible } from '@testing-library/user-event/dist/utils';
+
 const RadialGradient = styled.div`
   position: absolute;
   width: 20px;
   height: 20px;
-
-  /* Change the background color to red when projectHovered is true */
   background: radial-gradient(
     ellipse at center,
     transparent 0%,
     transparent 0%,
     ${({ projectHovered, isDarkMode }) =>
-      projectHovered ? 'red' : isDarkMode ? 'white' : 'black'} 40%,
+  projectHovered ? 'brown 300%' : isDarkMode ? 'white 40%' : 'black 40%'} ,
     ${({ projectHovered, isDarkMode }) =>
-      projectHovered ? 'red' : isDarkMode ? 'white' : 'black'} 100%
+  projectHovered ? 'brown 100%' : isDarkMode ? 'white 100%' : 'black 100%'} 
   );
-
-  clip-path: ${({ projectMenuHovered }) =>
-    projectMenuHovered
+  clip-path: ${({ projectMenuHovered, projectHovered, isVisible, isDarkMode}) =>
+    projectMenuHovered || projectHovered || isVisible || !isDarkMode
       ? 'circle(10px at center)'
       : 'polygon(50% 0%, 61.8% 38.2%, 100% 50%, 61.8% 61.8%, 50% 100%, 38.2% 61.8%, 0% 50%, 38.2% 38.2%)'};
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 1000;
+  z-index: 9000;
   animation: glowing 1s infinite alternate;
   transition: transform 0.3s ease;
+  mix-blend-mode: difference;
   transform: ${({ projectMenuHovered }) => (projectMenuHovered ? 'scale(1.0)' : 'scale(2.0)')};
+  
+  ${({ projectHovered }) => projectHovered ? `transform: scale(5.0);` : ``};
   @keyframes glowing {
     0% {
       opacity: 0.7;
@@ -263,6 +265,7 @@ useEffect(() => {
     >
       {hovering && (
         <RadialGradient
+          isVisible={isVisible}
           isDarkMode={isDarkMode}
           projectMenuHovered={projectMenuHovered}
           projectHovered={projectHovered}
