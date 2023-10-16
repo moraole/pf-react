@@ -43,7 +43,7 @@ const Home = () => {
   const initialDarkMode = storedDarkMode === 'true' || storedDarkMode === null;
 
   const [isDarkMode, setIsDarkMode] = useState(initialDarkMode);
-
+  const [isThemeButtonHovered, setIsThemeButtonHovered] = useState(false);
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
@@ -51,18 +51,22 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem('darkMode', isDarkMode);
   }, [isDarkMode]);
-
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
       {<StarsBackground isDarkMode={isDarkMode} />}
       <MainContainer>
-        <ContentWrapper>
-          <Header isDarkMode={isDarkMode}></Header>
-        </ContentWrapper>
-        <FancySwitchButtonWrapper>
+        <FancySwitchButtonWrapper
+          onMouseEnter={() => setIsThemeButtonHovered(true)}
+          onMouseLeave={() => setIsThemeButtonHovered(false)}
+        >
           <FancySwitchButton isOn={isDarkMode} onToggle={toggleDarkMode} />
         </FancySwitchButtonWrapper>
+        <ContentWrapper>
+          
+          <Header isDarkMode={isDarkMode} isThemeButtonHovered={isThemeButtonHovered}></Header>
+        </ContentWrapper>
+
       </MainContainer>
     </ThemeProvider>
   );

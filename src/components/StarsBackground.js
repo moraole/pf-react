@@ -6,7 +6,7 @@ const animStar = keyframes`
     transform: translateY(0px);
   }
   to {
-    transform: translateY(-2000px);
+    transform: translateY(-1000px);
   }
 `;
 

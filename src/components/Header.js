@@ -5,31 +5,35 @@ import lightTheme from '../themes/lightTheme';
 import darkTheme from '../themes/darkTheme';
 import Project1 from './Project1';
 import Project2 from './Project2';
+import SmallDeviceBox from './SmallDeviceBox';
 import { isVisible } from '@testing-library/user-event/dist/utils';
 
 const RadialGradient = styled.div`
+  cursor: none;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  ${({ isVisible, projectHovered, projectMenuHovered }) => isVisible && !projectHovered && !projectMenuHovered ? 'width: 0px;' : 'width: 20px'};
+  ${({ isVisible, projectHovered, projectMenuHovered }) => isVisible && !projectHovered && !projectMenuHovered ? 'height: 0px;: -22px' : 'height: 20px'};
+  mix-blend-mode: difference;
   background: radial-gradient(
     ellipse at center,
-    transparent 0%,
-    transparent 0%,
+    ${({ isDarkMode }) => isDarkMode ? 'transparent 0%,' : 'white 100%,'}
+    ${({ isDarkMode }) => isDarkMode ? 'transparent 0%,' : 'white 100%,'}
     ${({ projectHovered, isDarkMode }) =>
-  projectHovered ? 'brown 300%' : isDarkMode ? 'white 40%' : 'black 40%'} ,
+    projectHovered ? 'brown 300%' : isDarkMode ? 'white 40%' : 'black 40%'} ,
     ${({ projectHovered, isDarkMode }) =>
-  projectHovered ? 'brown 100%' : isDarkMode ? 'white 100%' : 'black 100%'} 
+    projectHovered ? 'brown 100%' : isDarkMode ? 'white 100%' : 'black 100%'} 
   );
-  clip-path: ${({ projectMenuHovered, projectHovered, isVisible, isDarkMode}) =>
-    projectMenuHovered || projectHovered || isVisible || !isDarkMode
+  clip-path: ${({ projectMenuHovered, projectHovered, isVisible, isDarkMode }) =>
+    projectMenuHovered || projectHovered || !isDarkMode
       ? 'circle(10px at center)'
       : 'polygon(50% 0%, 61.8% 38.2%, 100% 50%, 61.8% 61.8%, 50% 100%, 38.2% 61.8%, 0% 50%, 38.2% 38.2%)'};
-  transform: translate(-50%, -50%);
+  
+  ${({ isVisible, projectHovered, projectMenuHovered }) => isVisible && !projectHovered && !projectMenuHovered ? 'clip-path: none' : ''};
   pointer-events: none;
   z-index: 9000;
   animation: glowing 1s infinite alternate;
   transition: transform 0.3s ease;
-  mix-blend-mode: difference;
+  
   transform: ${({ projectMenuHovered }) => (projectMenuHovered ? 'scale(1.0)' : 'scale(2.0)')};
   
   ${({ projectHovered }) => projectHovered ? `transform: scale(5.0);` : ``};
@@ -40,6 +44,23 @@ const RadialGradient = styled.div`
     100% {
       opacity: 1;
     }
+  }
+    &:before {
+    content: '${({ isVisible, projectHovered, projectMenuHovered }) => (!isVisible || projectHovered || projectMenuHovered ? '' : 'click to close menu')}';
+    position: absolute;
+    font-size: 9px;
+    width: 70px;
+    height: 10px;
+    border: dotted 0.2px;
+    border-top: 0px; 
+    border-bottom: 0px; 
+    padding: 5px;
+    color: white; // Change the color to match your design
+    cursor: pointer;
+    mix-blend-mode: difference;
+    top: 50%; // Adjust the positioning as needed
+    left: 50%; // Adjust the positioning as needed
+    transform: translate(-50%, -50%);
   }
 `;
 
@@ -100,7 +121,7 @@ const Border = styled.div`
 
 const ExpandableLetter = styled.span`
   position: relative;
-  cursor: pointer;
+  cursor: default;
 
   &:hover span:last-child {
     font-size: 40px;
@@ -165,9 +186,9 @@ const ProjectMenu = styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; // Align project items to the left
   z-index: 10;
-  `;
+`;
 
 const Project1Description = styled(ProjectDescription)`
   transform: translateY(-30px);
@@ -188,7 +209,13 @@ const HeaderContainer = styled.div`
 const ProjectContainer = styled.div`
 
 `
-const Header = ({ isDarkMode }) => {
+const WorkHeading = styled.div`
+  color: ${({ theme }) => theme.text}; // Choose the color you prefer
+  font-size: 16px;
+  margin-bottom: 10px;
+`;
+
+const Header = ({ isDarkMode, isThemeButtonHovered }) => {
   const [hoveredE1, setHoveredE1] = useState(false);
   const [hoveredE2, setHoveredE2] = useState(false);
   const [hoveredM, setHoveredM] = useState(false);
@@ -197,9 +224,10 @@ const Header = ({ isDarkMode }) => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [projectMenuHovered, setProjectMenuHovered] = useState(false);
   const [projectDescriptionsVisible, setProjectDescriptionsVisible] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState('');
   const [isVisible, setIsVisible] = useState(false);
-  const [projectHovered, setProjectHovered] =useState(false);
+  const [projectHovered, setProjectHovered] = useState(false);
+  const [projectClosed, setProjectClosed] = useState(false);
   const isPhone = window.innerWidth <= 768;
 
   const handleMouseEnter = () => {
@@ -215,11 +243,38 @@ const Header = ({ isDarkMode }) => {
   };
 
   const handleProjectItemClick = (projectName) => {
-    setSelectedProject(projectName);
-    setProjectDescriptionsVisible(true); // Add this line
-    setIsVisible(true);
+    if (selectedProject != projectName) {
+        if (selectedProject) {
+          setTimeout(() => {
+            setSelectedProject(projectName);
+            setProjectDescriptionsVisible(true); // Add this line
+            setIsVisible(true);
+          }, 300);
+        }
+        else {
+          setSelectedProject(projectName);
+          setProjectDescriptionsVisible(true); // Add this line
+          setIsVisible(true);
+        }
+      }
+      else {
+        setTimeout(() => {
+          setIsVisible(false);
+          setSelectedProject('');
+        }, 300);
+      }
   };
 
+  const handleCloseProject = () => {
+    if (!projectMenuHovered && !projectHovered) {
+      setTimeout(() => {
+        setSelectedProject('');
+        setProjectDescriptionsVisible(true);
+        setProjectClosed(true);
+        setIsVisible(false);
+      }, 300);
+    }
+  };
   useEffect(() => {
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -231,37 +286,39 @@ const Header = ({ isDarkMode }) => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
-// Inside your Header.js
-useEffect(() => {
-  document.addEventListener('mouseenter', handleMouseEnter);
-  document.addEventListener('mouseleave', handleMouseLeave);
-  document.addEventListener('mousemove', handleMouseMove);
+  // Inside your Header.js
+  useEffect(() => {
+    document.addEventListener('mouseenter', handleMouseEnter);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mousemove', handleMouseMove);
 
-  return () => {
-    document.removeEventListener('mouseenter', handleMouseEnter);
-    document.removeEventListener('mouseleave', handleMouseLeave);
-    document.removeEventListener('mousemove', handleMouseMove);
-  };
-}, []);
-
-// Add this useEffect to control the animations
-useEffect(() => {
-  const projectDescriptions = document.querySelectorAll('.project-description');
-  if (projectDescriptionsVisible) {
-    projectDescriptions.forEach((desc) => {
-      desc.classList.add('slide-in-active');
-    });
-  } else {
-    projectDescriptions.forEach((desc) => {
-      desc.classList.remove('slide-in-active');
-    });
-  }
-}, [projectDescriptionsVisible]);
+    return () => {
+      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+  console.log("isThemeButtonHovered at Header:", isThemeButtonHovered)
+  // Add this useEffect to control the animations
+  useEffect(() => {
+    const projectDescriptions = document.querySelectorAll('.project-description');
+    if (projectDescriptionsVisible) {
+      projectDescriptions.forEach((desc) => {
+        desc.classList.add('slide-in-active');
+      });
+    } else {
+      projectDescriptions.forEach((desc) => {
+        desc.classList.remove('slide-in-active');
+      });
+    }
+  }, [projectDescriptionsVisible]);
   return (
     <HeaderContainer
+      onClick={handleCloseProject}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
+      hovering={hovering}
     >
       {hovering && (
         <RadialGradient
@@ -281,61 +338,38 @@ useEffect(() => {
           {isDarkMode ? (
             <>
               <Moon />
-              <ProjectMenu
-                onMouseEnter={() => setProjectMenuHovered(true)}
-                onMouseLeave={() => setProjectMenuHovered(false)}
-              >
-                <ProjectMenuItem onClick={() =>  handleProjectItemClick('project1')}>
-                  Project 1
-                </ProjectMenuItem>
-                <Project1Description className="project-description slide-in">
-  Project 1 Description
-</Project1Description>
-                <ProjectMenuItem onClick={() =>  handleProjectItemClick('project2')}>
-                  Project 2
-                </ProjectMenuItem>
-                {projectDescriptionsVisible && (
-                  <Project2Description>Project 2 Description</Project2Description>
-                )}
-                <ProjectMenuItem href="#project3" onClick={handleProjectItemClick}>
-                  Project 3
-                </ProjectMenuItem>
-                {projectDescriptionsVisible && (
-                  <Project3Description>Project 3 Description</Project3Description>
-                )}
-                
-              </ProjectMenu>
-
             </>
           ) : (
             <>
-              <ProjectMenu
-                onMouseEnter={() => setProjectMenuHovered(true)}
-                onMouseLeave={() => setProjectMenuHovered(false)}
-              >
-                <ProjectMenuItem href="#project1" onClick={handleProjectItemClick}>
-                  Project 1
-                </ProjectMenuItem>
-                {projectDescriptionsVisible && (
-                  <Project1Description>Project 1 Description</Project1Description>
-                )}
-                <ProjectMenuItem href="#project2" onClick={handleProjectItemClick}>
-                  Project 2
-                </ProjectMenuItem>
-                {projectDescriptionsVisible && (
-                  <Project2Description>Project 2 Description</Project2Description>
-                )}
-                <ProjectMenuItem href="#project3" onClick={handleProjectItemClick}>
-                  Project 3
-                </ProjectMenuItem>
-                {projectDescriptionsVisible && (
-                  <Project3Description>Project 3 Description</Project3Description>
-                )}
-              </ProjectMenu>
+
             </>
           )}
+          <ProjectMenu
+            onMouseEnter={() => setProjectMenuHovered(true)}
+            onMouseLeave={() => setProjectMenuHovered(false)}
+          >
+            <WorkHeading>Work:</WorkHeading>
+            <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
+              Project 1
+            </ProjectMenuItem>
+            {projectDescriptionsVisible && (
+              <Project1Description>Project 1 Description</Project1Description>
+            )}
+            <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
+              Project 2
+            </ProjectMenuItem>
+            {projectDescriptionsVisible && (
+              <Project2Description>Project 2 Description</Project2Description>
+            )}
+          </ProjectMenu>
           <StarsBackground isDarkMode={isDarkMode} />
-          <Logo>
+          {isPhone ? (
+            <>
+              <SmallDeviceBox isDarkMode={isDarkMode} />
+            </>
+          ) : (
+            <>
+            <Logo>
             <ExpandableLetter
               isPhone={isPhone}
               onMouseEnter={() => setHoveredE1(true)}
@@ -356,7 +390,9 @@ useEffect(() => {
               onMouseLeave={() => setHoveredM(false)}
             >
               M
-              <ExpandedText style={{ opacity: hoveredM ? 1 : 0 }}>ora</ExpandedText>
+              <ExpandedText style={{ opacity: hoveredM ? 1 : 0 }}>
+                <span style={{ paddingLeft: '10px' }}>ora</span>
+              </ExpandedText>
             </ExpandableLetter>
             <ExpandableLetter
               onMouseEnter={() => setHoveredO(true)}
@@ -366,17 +402,21 @@ useEffect(() => {
               <ExpandedText style={{ opacity: hoveredO ? 1 : 0 }}>lmedo</ExpandedText>
             </ExpandableLetter>
           </Logo>
+            </>
+          ) }
+          
         </HeaderContent>
       </Border>
       <ProjectContainer
         onMouseEnter={() => setProjectHovered(true)}
         onMouseLeave={() => setProjectHovered(false)}
       >
-      {isVisible ? <Project1 isVisible={false} /> : null}
+        {selectedProject == 'project1' ? <Project1 isVisible={false} isThemeButtonHovered={isThemeButtonHovered} /> : null}
+        {selectedProject == 'project2' ? <Project2 isVisible={false} /> : null}
       </ProjectContainer>
-      
+
     </HeaderContainer>
-    
+
   );
 };
 

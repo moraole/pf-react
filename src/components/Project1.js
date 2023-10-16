@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 const Box = styled.div`
   position: absolute;
-  top: 80%; /* Position at the top of the parent (header) */
-  left: 25%; /* Position at the left of the parent (header) */
+  top: 80%;
+  left: 25%;
   height: 20%;
   width: 50%;
   overflow: hidden;
@@ -39,35 +39,45 @@ const Description = styled.p`
   margin: 0;
 `;
 
-const Project1 = ({ isVisible }) => {
+const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
   const [hovering, setHovering] = useState(false);
   const [delayedVisibility, setDelayedVisibility] = useState(isVisible);
+  const boxRef = useRef(null);
+
   const handleMouseEnter = () => {
     setHovering(true);
   };
+
+  const handleMouseLeave = () => {
+    setHovering(false);
+  };
+  const handleClickOutside = (e) => {
+
+    if (boxRef.current && !boxRef.current.contains(e.target) && !isThemeButtonHovered) {
+      setDelayedVisibility(false);
+    }
+  };
+
   useEffect(() => {
     if (!isVisible) {
-      // Delay setting visibility to true by 1 second
       const timeout = setTimeout(() => {
         setDelayedVisibility(true);
       }, 100);
 
+      document.addEventListener('click', handleClickOutside);
+
       return () => {
         clearTimeout(timeout);
+        document.removeEventListener('click', handleClickOutside);
       };
     }
-  }, [isVisible]);
+  }, [isVisible, isThemeButtonHovered]);
 
-  console.log("test:",isVisible);
   return (
-    <Box
-    onMouseEnter={handleMouseEnter}
-    >
+    <Box ref={boxRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <HiddenBox isVisible={delayedVisibility}>
         <Heading>Project 1</Heading>
-        <Description>
-          This is a description of project 1
-        </Description>
+        <Description>This is a description of project 1</Description>
       </HiddenBox>
     </Box>
   );
