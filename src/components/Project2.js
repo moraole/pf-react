@@ -3,12 +3,17 @@ import styled, { css } from 'styled-components';
 
 const Box = styled.div`
   position: absolute;
-  top: 80%;
+  top: 70%;
   left: 25%;
-  height: 20%;
+  height: 30%;
   width: 50%;
   overflow: hidden;
   cursor: pointer;
+    
+  @media (max-width: 900px) {
+    width: 85%;
+    left: 7.5%;
+  }
 `;
 
 const HiddenBox = styled.div`

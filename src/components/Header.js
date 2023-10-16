@@ -5,7 +5,7 @@ import lightTheme from '../themes/lightTheme';
 import darkTheme from '../themes/darkTheme';
 import Project1 from './Project1';
 import Project2 from './Project2';
-import SmallDeviceBox from './SmallDeviceBox';
+import SmallDeviceBox from './logoBox';
 import { isVisible } from '@testing-library/user-event/dist/utils';
 
 const RadialGradient = styled.div`
@@ -61,7 +61,11 @@ const RadialGradient = styled.div`
     top: 50%; // Adjust the positioning as needed
     left: 50%; // Adjust the positioning as needed
     transform: translate(-50%, -50%);
+    @
   }
+  @media (max-width: 900px) {
+    display:none;
+}
 `;
 
 
@@ -75,11 +79,11 @@ const Moon = styled.div`
   z-index: 10;
   top: 2.5vh;
   right: 10vw;
-`;
-
-const LogoLetter = styled.span`
-  font-family: 'Playfair Display', serif;
-  user-select: none;
+  
+  @media (max-width: 900px) {
+    height: 160px;
+    width: 160px;
+}
 `;
 
 const Logo = styled.div`
@@ -112,11 +116,6 @@ const HeaderContent = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100%;
-`;
-
-const Border = styled.div`
-  border-left: 0vw solid ${({ theme }) => (theme === lightTheme ? 'white' : theme.background)};
-  border-right: 0vw solid ${({ theme }) => (theme === lightTheme ? 'white' : theme.background)};
 `;
 
 const ExpandableLetter = styled.span`
@@ -162,20 +161,9 @@ const ProjectMenuItem = styled.a`
   }
 `;
 
-const ProjectDescription = styled.div`
-  position: absolute;
-  left: 100%;
-  top: 0;
-  width: 200px;
-  background-color: ${({ theme }) => theme.background};
-  border: 2px solid ${({ theme }) => theme.text};
-  border-radius: 5px;
-  padding: 10px;
-  display: none;
-  z-index: 10000;
-`;
 
 const ProjectMenu = styled.div`
+  font-family: sans-serif;
   position: absolute;
   top: 70%;
   right: 10%;
@@ -187,20 +175,14 @@ const ProjectMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start; // Align project items to the left
-  z-index: 10;
+  z-index: 900;
+
+  @media (max-width: 900px) {
+    background-color: ${({ theme }) => theme.phonebg}
+  }
 `;
 
-const Project1Description = styled(ProjectDescription)`
-  transform: translateY(-30px);
-`;
 
-const Project2Description = styled(ProjectDescription)`
-  transform: translateY(0);
-`;
-
-const Project3Description = styled(ProjectDescription)`
-  transform: translateY(30px);
-`;
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -223,12 +205,11 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
   const [hovering, setHovering] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [projectMenuHovered, setProjectMenuHovered] = useState(false);
-  const [projectDescriptionsVisible, setProjectDescriptionsVisible] = useState(false);
   const [selectedProject, setSelectedProject] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const [projectHovered, setProjectHovered] = useState(false);
   const [projectClosed, setProjectClosed] = useState(false);
-  const isPhone = window.innerWidth <= 768;
+  const isPhone = window.innerWidth <= 900;
 
   const handleMouseEnter = () => {
     setHovering(true);
@@ -247,13 +228,11 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
         if (selectedProject) {
           setTimeout(() => {
             setSelectedProject(projectName);
-            setProjectDescriptionsVisible(true); // Add this line
             setIsVisible(true);
           }, 300);
         }
         else {
           setSelectedProject(projectName);
-          setProjectDescriptionsVisible(true); // Add this line
           setIsVisible(true);
         }
       }
@@ -269,7 +248,6 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
     if (!projectMenuHovered && !projectHovered) {
       setTimeout(() => {
         setSelectedProject('');
-        setProjectDescriptionsVisible(true);
         setProjectClosed(true);
         setIsVisible(false);
       }, 300);
@@ -298,20 +276,6 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
-  console.log("isThemeButtonHovered at Header:", isThemeButtonHovered)
-  // Add this useEffect to control the animations
-  useEffect(() => {
-    const projectDescriptions = document.querySelectorAll('.project-description');
-    if (projectDescriptionsVisible) {
-      projectDescriptions.forEach((desc) => {
-        desc.classList.add('slide-in-active');
-      });
-    } else {
-      projectDescriptions.forEach((desc) => {
-        desc.classList.remove('slide-in-active');
-      });
-    }
-  }, [projectDescriptionsVisible]);
   return (
     <HeaderContainer
       onClick={handleCloseProject}
@@ -333,7 +297,6 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           }}
         />
       )}
-      <Border>
         <HeaderContent>
           {isDarkMode ? (
             <>
@@ -352,21 +315,21 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
             <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
               Project 1
             </ProjectMenuItem>
-            {projectDescriptionsVisible && (
-              <Project1Description>Project 1 Description</Project1Description>
-            )}
             <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
               Project 2
             </ProjectMenuItem>
-            {projectDescriptionsVisible && (
-              <Project2Description>Project 2 Description</Project2Description>
-            )}
           </ProjectMenu>
           <StarsBackground isDarkMode={isDarkMode} />
           {isPhone ? (
-            <>
+            
+            isDarkMode ?
               <SmallDeviceBox isDarkMode={isDarkMode} />
-            </>
+              :
+              <SmallDeviceBox isDarkMode={isDarkMode} />
+              
+
+              
+            
           ) : (
             <>
             <Logo>
@@ -406,13 +369,26 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           ) }
           
         </HeaderContent>
-      </Border>
       <ProjectContainer
         onMouseEnter={() => setProjectHovered(true)}
         onMouseLeave={() => setProjectHovered(false)}
       >
-        {selectedProject == 'project1' ? <Project1 isVisible={false} isThemeButtonHovered={isThemeButtonHovered} /> : null}
-        {selectedProject == 'project2' ? <Project2 isVisible={false} /> : null}
+        {selectedProject == 'project1' ?
+          <Project1 
+            isVisible={false}
+            isThemeButtonHovered={isThemeButtonHovered}
+          /> 
+          : 
+          null
+          }
+        {selectedProject == 'project2' ?
+          <Project2
+            isVisible={false}
+            isThemeButtonHovered={isThemeButtonHovered}
+          />
+          :
+          null
+        }
       </ProjectContainer>
 
     </HeaderContainer>

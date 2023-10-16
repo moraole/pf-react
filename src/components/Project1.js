@@ -3,12 +3,17 @@ import styled, { css } from 'styled-components';
 
 const Box = styled.div`
   position: absolute;
-  top: 80%;
+  top: 65%;
   left: 25%;
-  height: 20%;
+  height: 35%;
   width: 50%;
   overflow: hidden;
   cursor: pointer;
+  
+  @media (max-width: 900px) {
+    width: 85%;
+    left: 7.5%;
+  }
 `;
 
 const HiddenBox = styled.div`
@@ -39,7 +44,7 @@ const Description = styled.p`
   margin: 0;
 `;
 
-const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
+const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered}) => {
   const [hovering, setHovering] = useState(false);
   const [delayedVisibility, setDelayedVisibility] = useState(isVisible);
   const boxRef = useRef(null);
