@@ -18,9 +18,6 @@ const LetterBox = styled.div`
 `;
 
 const SmallDeviceBox = (isDarkMode) => {
-    useEffect{
-        
-    }
     return (
         <CenteredBox>
             <div>
