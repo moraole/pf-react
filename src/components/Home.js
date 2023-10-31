@@ -24,7 +24,6 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     transition: background-color 0.3s, color 0.3s;
     margin: 0;
-    height: 100px;
     overflow-x: hidden;
     overflow-y: hidden;
     max-height: 100vh;
