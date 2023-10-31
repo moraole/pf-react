@@ -17,7 +17,8 @@ const Box = styled.div`
   
   @media (max-width: 900px) {
     width: 85%;
-    left: 7.5%;
+    left: 7%;
+    top: 23%;
     
   }
 `;

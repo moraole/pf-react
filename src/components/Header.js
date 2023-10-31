@@ -180,6 +180,7 @@ const ProjectMenuItem = styled.div`
   font-family: 'DM Mono', monospace;
   display: flex;
   align-items: center;
+  width: 340px;
   margin: 5px 0;
   cursor: pointer;
 `;
