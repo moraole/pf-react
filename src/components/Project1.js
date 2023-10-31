@@ -14,6 +14,7 @@ const Box = styled.div`
   overflow: hidden;
   cursor: pointer;
   font-family: sans-serif;
+  z-index: 20;
   
   @media (max-width: 900px) {
     width: 85%;

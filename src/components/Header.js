@@ -149,17 +149,17 @@ const ProjectMenu = styled.div`
   position: absolute;
   top: 70%;
   right: 3%;
-  
+  z-index: 15;
   background-color: ${({ theme }) => theme.background};
   border-radius: 5px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; // Align project items to the left
-  z-index: 900;
 
   @media (max-width: 900px) {
     background-color: ${({ theme }) => theme.phonebg};
+    ${({})};
     top: 50%;
     right: 40%;
   }
@@ -198,6 +198,7 @@ const ProjectName = styled.div`
 const ProjectYear = styled.div`
   width: 50px; // Adjust the width as needed
   text-align: right;
+  line-height: 30px; /* Adjust the line-height to match the height of your ProjectNumber */
 `;
 
 
