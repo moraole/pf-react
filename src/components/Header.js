@@ -159,9 +159,10 @@ const ProjectMenu = styled.div`
 
   @media (max-width: 900px) {
     background-color: ${({ theme }) => theme.phonebg};
-    ${({})};
+    
     top: 50%;
-    right: 40%;
+    right: 0%;
+    left: 2%;
   }
   @media (max-width: 1360px) {
     font-size: 13px;
@@ -193,12 +194,13 @@ const ProjectNumber = styled.div`
 
 const ProjectName = styled.div`
   text-align: center;
+  flex: 1;
 `;
 
 const ProjectYear = styled.div`
   width: 50px; // Adjust the width as needed
   text-align: right;
-  line-height: 30px; /* Adjust the line-height to match the height of your ProjectNumber */
+
 `;
 
 
@@ -333,9 +335,10 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           </ProjectMenuItem>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
             <ProjectNumber>02</ProjectNumber>
-            <ProjectName>Project 2</ProjectName>
+            <ProjectName>Project 2 </ProjectName>
             <ProjectYear>2024</ProjectYear>
           </ProjectMenuItem>
+          
         </ProjectMenu>
           <StarsBackground isDarkMode={isDarkMode} />
           {isPhone ? (
