@@ -166,7 +166,7 @@ const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered}) => {
               Your long description content goes here. Your long description content goes here.
               Your long description content goes here. Your long description content goes here.
               Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.end
             </Description>
           </DescriptionContainer>
         </SimpleBar>
