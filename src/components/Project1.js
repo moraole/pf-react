@@ -1,25 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import lightTheme from '../themes/lightTheme';
+import darkTheme from '../themes/darkTheme';
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 
 const Box = styled.div`
   position: absolute;
-  top: 65%;
+  top: 25%;
   left: 25%;
-  height: 35%;
+  height: 75%;
   width: 50%;
   overflow: hidden;
   cursor: pointer;
+  font-family: sans-serif;
   
   @media (max-width: 900px) {
     width: 85%;
     left: 7.5%;
+    
   }
 `;
 
 const HiddenBox = styled.div`
+  border-radius: 8px;
   position: relative;
   top: 100%;
-  background: #428bca;
+  background: ${({ theme }) => theme.primaryColor};
   height: 100%;
   transition: top 0.3s ease-out;
   display: flex;
@@ -37,12 +44,23 @@ const HiddenBox = styled.div`
 `;
 
 const Heading = styled.h1`
-  margin: 0;
+font-weight: 100;
+  position: absolute;
+  top: -4px;
+  left: 20px;
+  
+`;
+
+const DescriptionContainer = styled.div`
+
 `;
 
 const Description = styled.p`
   margin: 0;
+  width: 100%;
 `;
+
+
 
 const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered}) => {
   const [hovering, setHovering] = useState(false);
@@ -80,10 +98,80 @@ const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered}) => {
 
   return (
     <Box ref={boxRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <HiddenBox isVisible={delayedVisibility}>
-        <Heading>Project 1</Heading>
-        <Description>This is a description of project 1</Description>
+      <HiddenBox theme={isDarkMode ? darkTheme : lightTheme} isVisible={delayedVisibility}>
+        <Heading>CS Education at SITE 2023</Heading>
+        <SimpleBar style={{ width: '90%', maxHeight: '80%', overflowY: 'auto', top: '20px' }}>
+          <DescriptionContainer>
+            <Description>
+              1Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+              Your long description content goes here. Your long description content goes here.
+            </Description>
+          </DescriptionContainer>
+        </SimpleBar>
       </HiddenBox>
+      
     </Box>
   );
 };

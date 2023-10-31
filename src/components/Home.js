@@ -13,12 +13,21 @@ const GlobalStyles = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
+  @font-face {
+    font-family: 'DM Mono';
+    src: url('../fonts/DMMono-Light.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
   body {
     background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
     transition: background-color 0.3s, color 0.3s;
     margin: 0;
+    height: 100px;
     overflow-x: hidden;
+    max-height: 100vh;
+    max-width: 100vw;
   }
 `;
 
@@ -63,10 +72,8 @@ const Home = () => {
           <FancySwitchButton isOn={isDarkMode} onToggle={toggleDarkMode} />
         </FancySwitchButtonWrapper>
         <ContentWrapper>
-          
           <Header isDarkMode={isDarkMode} isThemeButtonHovered={isThemeButtonHovered}></Header>
         </ContentWrapper>
-
       </MainContainer>
     </ThemeProvider>
   );

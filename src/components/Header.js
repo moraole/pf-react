@@ -81,8 +81,8 @@ const Moon = styled.div`
   right: 10vw;
   
   @media (max-width: 900px) {
-    height: 160px;
-    width: 160px;
+    height: 50px;
+    width: 50px;
 }
 `;
 
@@ -144,32 +144,13 @@ const ExpandedText = styled.span`
   pointer-events: none;
 `;
 
-const ProjectMenuItem = styled.a`
-  text-decoration: none;
-  color: ${({ theme }) => theme.text};
-  font-size: 16px;
-  height: 30px;
-  margin: 5px 0;
-  transition: color 0.3s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border-bottom: solid 0.1px;
-
-  &:hover {
-    color: ${({ theme }) => theme.accent};
-  }
-`;
-
-
 const ProjectMenu = styled.div`
   font-family: sans-serif;
   position: absolute;
   top: 70%;
-  right: 10%;
-  transform: translateY(50%);
+  right: 3%;
+  
   background-color: ${({ theme }) => theme.background};
-  border: 2px solid ${({ theme }) => theme.text};
   border-radius: 5px;
   padding: 10px;
   display: flex;
@@ -178,8 +159,44 @@ const ProjectMenu = styled.div`
   z-index: 900;
 
   @media (max-width: 900px) {
-    background-color: ${({ theme }) => theme.phonebg}
+    background-color: ${({ theme }) => theme.phonebg};
+    top: 50%;
+    right: 40%;
   }
+  @media (max-width: 1360px) {
+    font-size: 13px;
+  }
+`;
+
+const WorkHeading = styled.div`
+  font-family: 'DM Mono', monospace;
+  display: absolute;
+  
+  font-size: 16px;
+  margin-bottom: 10px;
+`;
+
+const ProjectMenuItem = styled.div`
+  font-family: 'DM Mono', monospace;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  cursor: pointer;
+`;
+
+const ProjectNumber = styled.div`
+  margin-left: 20px;
+  width: 30px; // Adjust the width as needed
+  text-align: left;
+`;
+
+const ProjectName = styled.div`
+  text-align: center;
+`;
+
+const ProjectYear = styled.div`
+  width: 50px; // Adjust the width as needed
+  text-align: right;
 `;
 
 
@@ -191,11 +208,6 @@ const HeaderContainer = styled.div`
 const ProjectContainer = styled.div`
 
 `
-const WorkHeading = styled.div`
-  color: ${({ theme }) => theme.text}; // Choose the color you prefer
-  font-size: 16px;
-  margin-bottom: 10px;
-`;
 
 const Header = ({ isDarkMode, isThemeButtonHovered }) => {
   const [hoveredE1, setHoveredE1] = useState(false);
@@ -307,18 +319,22 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
 
             </>
           )}
-          <ProjectMenu
-            onMouseEnter={() => setProjectMenuHovered(true)}
-            onMouseLeave={() => setProjectMenuHovered(false)}
-          >
-            <WorkHeading>Work:</WorkHeading>
-            <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
-              Project 1
-            </ProjectMenuItem>
-            <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
-              Project 2
-            </ProjectMenuItem>
-          </ProjectMenu>
+        <ProjectMenu
+          onMouseEnter={() => setProjectMenuHovered(true)}
+          onMouseLeave={() => setProjectMenuHovered(false)}
+        >
+          <WorkHeading>Work:</WorkHeading>
+          <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
+            <ProjectNumber>01</ProjectNumber>
+            <ProjectName>Computer Science Education</ProjectName>
+            <ProjectYear>2023</ProjectYear>
+          </ProjectMenuItem>
+          <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
+            <ProjectNumber>02</ProjectNumber>
+            <ProjectName>Project 2</ProjectName>
+            <ProjectYear>2024</ProjectYear>
+          </ProjectMenuItem>
+        </ProjectMenu>
           <StarsBackground isDarkMode={isDarkMode} />
           {isPhone ? (
             
@@ -375,6 +391,7 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
       >
         {selectedProject == 'project1' ?
           <Project1 
+            isDarkMode={isDarkMode}
             isVisible={false}
             isThemeButtonHovered={isThemeButtonHovered}
           /> 
