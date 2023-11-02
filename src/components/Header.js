@@ -330,7 +330,7 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           <WorkHeading>Work:</WorkHeading>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
             <ProjectNumber>01</ProjectNumber>
-            <ProjectName>Computer Science Education</ProjectName>
+            <ProjectName>SITE 2023 Publication</ProjectName>
             <ProjectYear>2023</ProjectYear>
           </ProjectMenuItem>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>

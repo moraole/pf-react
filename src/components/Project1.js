@@ -61,7 +61,10 @@ const Description = styled.p`
   margin: 0;
   width: 100%;
 `;
-
+const StyledH1 = styled.h1`
+  font-weight: 2;
+  font-size: 24px;
+`
 
 
 const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered}) => {
@@ -101,79 +104,33 @@ const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered}) => {
   return (
     <Box ref={boxRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <HiddenBox theme={isDarkMode ? darkTheme : lightTheme} isVisible={delayedVisibility}>
-        <Heading>CS Education at SITE 2023</Heading>
+        <Heading>CS Education at SITE 2023 International Conference</Heading>
         <SimpleBar style={{ width: '90%', maxHeight: '80%', overflowY: 'auto', top: '20px' }}>
           <DescriptionContainer>
+            <StyledH1>What is this project?</StyledH1>
             <Description>
-              1Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.
-              Your long description content goes here. Your long description content goes here.end
+              This project is based on my paper presentation at the SITE 2023 International Conference.
+              I presented my research focusing on the shortage of accessible video resources for pre-service teachers
+              looking to reference classroom teaching methods in K-12 education.
+            </Description>
+            <StyledH1>Poster Presentation</StyledH1>
+            <Description>
+              Here, you can find an image of my poster presentation that I used at Western Washington University
+              present my research findings.
+              <img src="path_to_your_poster_image.jpg" alt="Poster Presentation" />
+            </Description>
+            <StyledH1>Abstract</StyledH1>
+            <Description>
+              As education in Computer Science continues to develop for K-12, pre-service teachers may find it beneficial
+              to look at current K-12 teachers demonstrate their teaching methods and curricula in a video format.
+              Our focus was to find videos that showed a live lesson being taught in a classroom environment to allow pre-service
+              teachers to reference the methods that may be used to teach a classroom full of students in K-12.
+              In this project, we want to show the shortage of these videos as we searched thoroughly and found that there were not many
+              that would be easily accessible to a current pre-service teacher looking to reference the lessons taught in a classroom setting.
             </Description>
           </DescriptionContainer>
         </SimpleBar>
       </HiddenBox>
-      
     </Box>
   );
 };
