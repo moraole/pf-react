@@ -100,7 +100,6 @@ const Logo = styled.div`
   height: 95vh;
   left: 0;
   top: 0;
-  z-index: 500;
   border-radius: 8px;
   padding: 20px;
 `;
@@ -126,6 +125,7 @@ const ExpandableLetter = styled.span`
     font-size: 40px;
     opacity: 1;
     transform: translate(40px, -55px);
+
   }
 `;
 
@@ -142,6 +142,7 @@ const ExpandedText = styled.span`
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
+
 `;
 
 const ProjectMenu = styled.div`
