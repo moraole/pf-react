@@ -213,7 +213,7 @@ const Project2 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
                     <Description>
                         - Match History Analysis: Lolpc evaluates your ranked match history to identify patterns and trends.
                         <br />
-                        - Win Probability Calculation: Utilizing advanced algorithms, Lolpc calculates the likelihood of winning in the next match.
+                        - Win Probability Calculation: Utilizing algorithms, Lolpc calculates the likelihood of winning in the next match.
                         <br />
                         - Player Advantage Insights: Gain insights into potential advantages or challenges based on historical performance.
                         <br />
@@ -224,6 +224,15 @@ const Project2 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
                     <Description>
                         In the competitive world of League of Legends, having a strategic edge can make all the difference. Lolpc empowers players by providing data-driven insights, allowing them to make strategic decisions and enhance their overall gaming experience. Whether you're a casual player or a seasoned veteran, Lolpc is your go-to tool for optimizing your chances of success on the Summoner's Rift.
                     </Description>
+                    
+                    <StyledH1>Working with Riot Games API</StyledH1>
+                    <Description>
+                        As part of the continuous improvement of Lolpc, I worked with Riot Games's developer portal to enhance the accuracy and efficiency of the win probability calculations. Recognizing the importance of data access, I visited Riot's Developer Portal and applied for increased API rate limits specifically for Lolpc.
+                        <br />
+                        Due to initial limitations, Lolpc generated predictions based on a restricted dataset. However, with the granted permission from Riot Games, I now have higher API limits, enabling me to gather more extensive match history data for a more precise analysis. This work reflects my commitment to providing users with the most accurate and valuable insights into their League of Legends gaming experience.
+                    </Description>
+                    <br />
+                    
                 </SimpleBar>
             </HiddenBox>
             {isZoomed && (

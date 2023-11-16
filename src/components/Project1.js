@@ -235,7 +235,7 @@ const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
             Pre-service teachers aspiring to teach Computer Science in K-12 schools face the challenge of understanding and implementing effective teaching methods. Access to real-world examples of classroom instruction is invaluable for their professional development. By seeking out and showcasing videos of live lessons in a classroom environment, our project empowers pre-service teachers with the resources they need to learn and grow.
             The significance of this endeavor lies in its potential to bridge the gap between theoretical knowledge and practical application. It equips future educators with the tools to observe, learn, and adapt instructional techniques, ultimately enhancing the quality of Computer Science education in K-12 schools. With this project, we strive to contribute to the betterment of education and the preparation of teachers who will inspire the next generation of computer scientists.
           </Description>
-
+          <br />
         </SimpleBar>
       </HiddenBox>
       {isZoomed && (
