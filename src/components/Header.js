@@ -5,6 +5,7 @@ import lightTheme from '../themes/lightTheme';
 import darkTheme from '../themes/darkTheme';
 import Project1 from './Project1';
 import Project2 from './Project2';
+import Project3 from './Project3';
 import SmallDeviceBox from './logoBox';
 import { isVisible } from '@testing-library/user-event/dist/utils';
 
@@ -336,8 +337,13 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           </ProjectMenuItem>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
             <ProjectNumber>02</ProjectNumber>
-            <ProjectName>Project 2 </ProjectName>
-            <ProjectYear>2024</ProjectYear>
+            <ProjectName>Selenium Discord Bot for Testing! </ProjectName>
+            <ProjectYear>2023</ProjectYear>
+          </ProjectMenuItem>
+          <ProjectMenuItem onClick={() => handleProjectItemClick('project3')}>
+            <ProjectNumber>02</ProjectNumber>
+            <ProjectName>League Of Legends Player Comparison App</ProjectName>
+            <ProjectYear>2023</ProjectYear>
           </ProjectMenuItem>
           
         </ProjectMenu>
@@ -406,6 +412,16 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           }
         {selectedProject == 'project2' ?
           <Project2
+            isDarkMode={isDarkMode}
+            isVisible={false}
+            isThemeButtonHovered={isThemeButtonHovered}
+          />
+          :
+          null
+        }
+        {selectedProject == 'project3' ?
+          <Project3
+            isDarkMode={isDarkMode}
             isVisible={false}
             isThemeButtonHovered={isThemeButtonHovered}
           />

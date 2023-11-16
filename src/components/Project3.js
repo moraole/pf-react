@@ -15,18 +15,18 @@ const Box = styled.div`
   overflow: hidden;
   font-family: sans-serif;
   z-index: 20;
-  
+
+  @media (max-width: 900px) {
+    width: 85%;
+    left: 7%;
+    top: 23%;
+    font-size: 12px;
+  }
   @media (max-width: 1450px) {
     width: 70%;
-    font-size: 8px;
+    font-size: 12px;
+    left:15%;
   }
-  @media (max-width: 900px) {
-    left:0%;
-    width: 100%;
-    top: 23%;
-    font-size: 9px;
-  }
-
 `;
 
 const HiddenBox = styled.div`
@@ -88,20 +88,13 @@ const Description = styled.p`
 const StyledH1 = styled.h1`
   font-weight: 2;
   font-size: 24px;
-
 `;
-
 const RightStyledH1 = styled(StyledH1)`
   position: absolute;
   font-weight: 2;
   font-size: 24px;
   top: -60px;
   bottom: 100px;
-    
-  @media(max-width: 1450px) {
-    top: -50px;
-    font-size: 20px;
-  }
 `;
 const ZoomedImage = styled.div`
   position: fixed;
@@ -124,7 +117,7 @@ const ZoomedImg = styled.img`
   cursor: zoom-out;
 `;
 
-const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
+const Project3 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
   const [hovering, setHovering] = useState(false);
   const [delayedVisibility, setDelayedVisibility] = useState(isVisible);
   const [isZoomed, setZoomed] = useState(false);
@@ -251,4 +244,4 @@ const Project1 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
   );
 };
 
-export default Project1;
+export default Project3;
