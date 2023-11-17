@@ -201,14 +201,14 @@ const Project2 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
                                 }}
                             />
                             <br />
-                <a 
+                LoLPC can be found <a 
                 href='https://lolpc.netlify.app'
                 style={{
                     color: isDarkMode ? 'white' : 'black',  // Change the color to make it more readable
                     textDecoration: 'underline',  // Add underlining for a typical hyperlink appearance
                     fontWeight: 'bold',  // Make the text bold for emphasis
                 }}
-                >Netlify app using serverless functions can be found here</a>
+                >here</a>
                         </LeftContainer>
                         <RightContainer>
                             <RightStyledH1>How Does It Work?</RightStyledH1>
