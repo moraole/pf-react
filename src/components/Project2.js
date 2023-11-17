@@ -200,6 +200,15 @@ const Project2 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
                                     cursor: 'pointer',
                                 }}
                             />
+                            <br />
+                <a 
+                href='https://lolpc.netlify.app'
+                style={{
+                    color: isDarkMode ? 'white' : 'black',  // Change the color to make it more readable
+                    textDecoration: 'underline',  // Add underlining for a typical hyperlink appearance
+                    fontWeight: 'bold',  // Make the text bold for emphasis
+                }}
+                >Netlify app using serverless functions can be found here</a>
                         </LeftContainer>
                         <RightContainer>
                             <RightStyledH1>How Does It Work?</RightStyledH1>

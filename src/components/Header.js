@@ -342,8 +342,8 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           </ProjectMenuItem>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project3')}>
             <ProjectNumber>03</ProjectNumber>
-            <ProjectName>Selenium Discord Bot for Testing!</ProjectName>
-            <ProjectYear>2023</ProjectYear>
+            <ProjectName>WorldCup Database using PostgresSQL</ProjectName>
+            <ProjectYear>2022</ProjectYear>
           </ProjectMenuItem>
           
         </ProjectMenu>
