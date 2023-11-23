@@ -200,10 +200,6 @@ Columns: winner_id
 References: teams(team_id)
 `}
           </DatabaseSchema>
-          <StyledH1>Primary and Foreign Key Relationships</StyledH1>
-          <Description>
-            The primary and foreign key relationships ensure data consistency and integrity within the 'games' and 'teams' tables. The 'game_id' serves as the primary key in the 'games' table, linking to the 'winner_id' and 'opponent_id' in the same table as foreign keys. Similarly, the 'team_id' in the 'teams' table acts as the primary key and is referenced as a foreign key in the 'games' table.
-          </Description>
           <br /><br />
         </SimpleBar>
       </HiddenBox>
