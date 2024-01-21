@@ -6,6 +6,7 @@ import darkTheme from '../themes/darkTheme';
 import Project1 from './Project1';
 import Project2 from './Project2';
 import Project3 from './Project3';
+import Project4 from './Project4';
 import SmallDeviceBox from './logoBox';
 import { isVisible } from '@testing-library/user-event/dist/utils';
 
@@ -330,22 +331,26 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           onMouseLeave={() => setProjectMenuHovered(false)}
         >
           <WorkHeading>Work:</WorkHeading>
-          <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
+          <ProjectMenuItem onClick={() => handleProjectItemClick('project3')}>
             <ProjectNumber>01</ProjectNumber>
+            <ProjectName>WorldCup Database using PostgresSQL</ProjectName>
+            <ProjectYear>2022</ProjectYear>
+          </ProjectMenuItem>
+          <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
+            <ProjectNumber>02</ProjectNumber>
             <ProjectName>SITE 2023 Publication</ProjectName>
             <ProjectYear>2023</ProjectYear>
           </ProjectMenuItem>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
-            <ProjectNumber>02</ProjectNumber>
+            <ProjectNumber>03</ProjectNumber>
             <ProjectName>League Of Legends Player Comparison App </ProjectName>
             <ProjectYear>2023</ProjectYear>
           </ProjectMenuItem>
-          <ProjectMenuItem onClick={() => handleProjectItemClick('project3')}>
-            <ProjectNumber>03</ProjectNumber>
-            <ProjectName>WorldCup Database using PostgresSQL</ProjectName>
-            <ProjectYear>2022</ProjectYear>
+          <ProjectMenuItem onClick={() => handleProjectItemClick('project4')}>
+            <ProjectNumber>04</ProjectNumber>
+            <ProjectName>Neural Network SMS Text Classifier</ProjectName>
+            <ProjectYear>2024</ProjectYear>
           </ProjectMenuItem>
-          
         </ProjectMenu>
           <StarsBackground isDarkMode={isDarkMode} />
           {isPhone ? (
@@ -421,6 +426,15 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
         }
         {selectedProject == 'project3' ?
           <Project3
+            isDarkMode={isDarkMode}
+            isVisible={false}
+            isThemeButtonHovered={isThemeButtonHovered}
+          />
+          :
+          null
+        }
+        {selectedProject == 'project4' ?
+          <Project4
             isDarkMode={isDarkMode}
             isVisible={false}
             isThemeButtonHovered={isThemeButtonHovered}
