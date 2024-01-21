@@ -98,6 +98,8 @@ const DatabaseSchema = styled.div`
 const Project3 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
   const [hovering, setHovering] = useState(false);
   const [delayedVisibility, setDelayedVisibility] = useState(isVisible);
+  const [isZoomed, setZoomed] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState(null);
   const boxRef = useRef(null);
 
   const handleMouseEnter = () => {
@@ -108,17 +110,28 @@ const Project3 = ({ isVisible, isDarkMode, isThemeButtonHovered }) => {
     setHovering(false);
   };
 
+  const handleClickOutside = e => {
+    if (
+      boxRef.current &&
+      !boxRef.current.contains(e.target) &&
+      !isThemeButtonHovered &&
+      !isZoomed &&
+      !e.target.classList.contains('zoomed-image')
+    ) {
+      setDelayedVisibility(false);
+    }
+  };
   useEffect(() => {
     if (!isVisible) {
       const timeout = setTimeout(() => {
         setDelayedVisibility(true);
       }, 100);
 
-      // Additional cleanup or event listeners if needed
+      document.addEventListener('click', handleClickOutside);
 
       return () => {
         clearTimeout(timeout);
-        // Additional cleanup or removal of event listeners if needed
+        document.removeEventListener('click', handleClickOutside);
       };
     }
   }, [isVisible, isThemeButtonHovered]);
