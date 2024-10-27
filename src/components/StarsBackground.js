@@ -1,66 +1,61 @@
-import React, { memo } from 'react';
-import styled, { keyframes } from 'styled-components';
-
-const animStar = keyframes`
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-1000px);
-  }
-`;
+import React, { memo, useEffect, useState, useMemo } from 'react';
+import styled from 'styled-components';
 
 const StarContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index
+  pointer-events: none;
+  z-index: 0;
 `;
 
 const Star = styled.div`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
-  background: ${({ isDarkMode }) => (isDarkMode ? 'black' : 'white')}; /* Set background to black in dark mode */
+  background-color: ${({ isDarkMode }) => (isDarkMode ? 'black' : 'white')};
   box-shadow: ${({ shadows }) => shadows};
-  animation: ${animStar} ${({ speed }) => speed}s linear infinite;
   opacity: ${({ isDarkMode }) => (isDarkMode ? '1' : '0.3')};
- 
 `;
 
 const StarsBackground = ({ isDarkMode }) => {
-  const generateBoxShadows = (n, color) => {
-    let shadows = [];
-    for (let i = 0; i < n; i++) {
-      const x = Math.floor(Math.random() * 3440);
-      const y = Math.floor(Math.random() * 2000);
-      shadows.push(`${x}px ${y}px ${color}`); /* Use white shadow in dark mode, black shadow in light mode */
-    }
-    return shadows.join(', ');
-  };
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
 
-  const smallShadows = generateBoxShadows(700, 'white');
-  const mediumShadows = generateBoxShadows(200, 'white');
-  const bigShadows = generateBoxShadows(100, 'white');
+  // Update viewport dimensions on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+      setViewportHeight(window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Generate stars within screen bounds
+  const smallShadows = useMemo(() => generateBoxShadows(20, isDarkMode ? 'white' : 'gray', viewportWidth, viewportHeight), [isDarkMode, viewportWidth, viewportHeight]);
+  const mediumShadows = useMemo(() => generateBoxShadows(20, isDarkMode ? 'white' : 'gray', viewportWidth, viewportHeight), [isDarkMode, viewportWidth, viewportHeight]);
+  const bigShadows = useMemo(() => generateBoxShadows(20, isDarkMode ? 'white' : 'gray', viewportWidth, viewportHeight), [isDarkMode, viewportWidth, viewportHeight]);
 
   return (
     <StarContainer>
-      <Star size={1} shadows={smallShadows} speed={250} isDarkMode={isDarkMode} />
-      <Star size={2} shadows={mediumShadows} speed={505} isDarkMode={isDarkMode} />
-      <Star size={3} shadows={bigShadows} speed={1000} isDarkMode={isDarkMode} />
-      <Star size={3} shadows={bigShadows} speed={1000} isDarkMode={isDarkMode} /> 
-      {isDarkMode ? (
-        <Star size={0} shadows={bigShadows} speed={1000} isDarkMode={isDarkMode} />
-      ) : (
-        <>
-            <Star size={5} shadows={generateBoxShadows(999, 'gray')} speed={1000} isDarkMode={isDarkMode} />
-          <Star size={5} shadows={generateBoxShadows(999, 'black')} speed={9900} isDarkMode={isDarkMode} />
-          {/* Add more stars here */}
-        </>
-      )}
-      {/* Add more stars with different sizes and speeds if needed */}
+      <Star size={1} shadows={smallShadows} isDarkMode={isDarkMode} />
+      <Star size={2} shadows={mediumShadows} isDarkMode={isDarkMode} />
+      <Star size={3} shadows={bigShadows} isDarkMode={isDarkMode} />
     </StarContainer>
   );
+};
+
+// Helper function with viewport bounds to limit stars within the visible area
+const generateBoxShadows = (n, color, viewportWidth, viewportHeight) => {
+  let shadows = [];
+  for (let i = 0; i < n; i++) {
+    const x = Math.floor(Math.random() * viewportWidth);
+    const y = Math.floor(Math.random() * viewportHeight);
+    shadows.push(`${x}px ${y}px ${color}`);
+  }
+  return shadows.join(', ');
 };
 
 export default memo(StarsBackground);
