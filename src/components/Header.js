@@ -340,8 +340,8 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
 
             </>
           )}
-        <CenteredLink href="https://your-url.com" target="_blank">
-          Visit My Website
+        <CenteredLink href="https://support.microsoft.com/en-us/office/dictate-your-documents-in-word-3876e05f-3fcc-418f-b8ab-db7ce0d11d3c" target="_blank">
+          Test Link
         </CenteredLink>
             <ProjectMenu
           onMouseEnter={() => setProjectMenuHovered(true)}
