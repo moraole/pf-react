@@ -10,6 +10,20 @@ import Project4 from './Project4';
 import SmallDeviceBox from './logoBox';
 import { isVisible } from '@testing-library/user-event/dist/utils';
 
+const CenteredLink = styled.a`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme === lightTheme ? 'black' : 'white'};
+  text-decoration: none;
+  font-weight: bold;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const RadialGradient = styled.div`
   cursor: none;
   position: absolute;
@@ -326,7 +340,10 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
 
             </>
           )}
-        <ProjectMenu
+        <CenteredLink href="https://your-url.com" target="_blank">
+          Visit My Website
+        </CenteredLink>
+            <ProjectMenu
           onMouseEnter={() => setProjectMenuHovered(true)}
           onMouseLeave={() => setProjectMenuHovered(false)}
         >
