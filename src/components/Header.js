@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import StarsBackground from './StarsBackground';
 import lightTheme from '../themes/lightTheme';
 import darkTheme from '../themes/darkTheme';
@@ -60,6 +60,13 @@ const Logo = styled.div`
   top: 0;
   border-radius: 8px;
   padding: 20px;
+
+  @media (max-width: 900px) {
+    font-size: 4rem;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
 `;
 
 const ExpandableLetter = styled.span`
@@ -116,9 +123,14 @@ const ProjectMenuItem = styled.div`
   font-family: 'DM Mono', monospace;
   display: flex;
   align-items: center;
-  width: 340px;
+  width: 100%;
   margin: 5px 0;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme === lightTheme ? '#f0f0f0' : '#333'};
+  }
 `;
 
 const ProjectNumber = styled.div`
@@ -153,6 +165,13 @@ const HeaderContent = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100%;
+`;
+
+const ProjectContainer = styled.div`
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  max-height: ${({ isVisible }) => (isVisible ? '1000px' : '0')};
+  opacity: ${({ isVisible }) => (isVisible ? '1' : '0')};
+  overflow: hidden;
 `;
 
 const Header = ({ isDarkMode }) => {
@@ -243,10 +262,18 @@ const Header = ({ isDarkMode }) => {
         )}
       </HeaderContent>
 
-      {selectedProject === 'project1' && <Project1 isDarkMode={isDarkMode} />}
-      {selectedProject === 'project2' && <Project2 isDarkMode={isDarkMode} />}
-      {selectedProject === 'project3' && <Project3 isDarkMode={isDarkMode} />}
-      {selectedProject === 'project4' && <Project4 isDarkMode={isDarkMode} />}
+      <ProjectContainer isVisible={selectedProject === 'project1'}>
+        <Project1 isDarkMode={isDarkMode} />
+      </ProjectContainer>
+      <ProjectContainer isVisible={selectedProject === 'project2'}>
+        <Project2 isDarkMode={isDarkMode} />
+      </ProjectContainer>
+      <ProjectContainer isVisible={selectedProject === 'project3'}>
+        <Project3 isDarkMode={isDarkMode} />
+      </ProjectContainer>
+      <ProjectContainer isVisible={selectedProject === 'project4'}>
+        <Project4 isDarkMode={isDarkMode} />
+      </ProjectContainer>
 
       {/* LinkedIn Button */}
       <LinkedInButton
