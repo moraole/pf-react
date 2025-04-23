@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import StarsBackground from './StarsBackground';
 import lightTheme from '../themes/lightTheme';
@@ -23,6 +23,24 @@ const Moon = styled.div`
   @media (max-width: 900px) {
     height: 50px;
     width: 50px;
+  }
+`;
+
+const LinkedInButton = styled.a`
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #0077b5; /* LinkedIn blue */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #005582;
   }
 `;
 
@@ -229,6 +247,15 @@ const Header = ({ isDarkMode }) => {
       {selectedProject === 'project2' && <Project2 isDarkMode={isDarkMode} />}
       {selectedProject === 'project3' && <Project3 isDarkMode={isDarkMode} />}
       {selectedProject === 'project4' && <Project4 isDarkMode={isDarkMode} />}
+
+      {/* LinkedIn Button */}
+      <LinkedInButton
+        href="https://www.linkedin.com/in/your-linkedin-profile"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Connect on LinkedIn
+      </LinkedInButton>
     </HeaderContainer>
   );
 };
