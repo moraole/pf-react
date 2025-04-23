@@ -349,7 +349,7 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           <ProjectMenuItem onClick={() => handleProjectItemClick('project3')}>
             <ProjectNumber>01</ProjectNumber>
             <ProjectName>WorldCup Database using PostgresSQL</ProjectName>
-            <ProjectYear>2022</ProjectYear>
+            <ProjectYear>2023</ProjectYear>
           </ProjectMenuItem>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project1')}>
             <ProjectNumber>02</ProjectNumber>
@@ -359,7 +359,7 @@ const Header = ({ isDarkMode, isThemeButtonHovered }) => {
           <ProjectMenuItem onClick={() => handleProjectItemClick('project2')}>
             <ProjectNumber>03</ProjectNumber>
             <ProjectName>League Of Legends Player Comparison App </ProjectName>
-            <ProjectYear>2023</ProjectYear>
+            <ProjectYear>2025</ProjectYear>
           </ProjectMenuItem>
           <ProjectMenuItem onClick={() => handleProjectItemClick('project4')}>
             <ProjectNumber>04</ProjectNumber>
