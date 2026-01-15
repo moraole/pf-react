@@ -11,3 +11,6 @@
 [build.environment]
   NODE_VERSION = "18"
   YARN_VERSION = "1.22.22"
+  
+[context.production.environment]
+  NETLIFY_BUILD_IMAGE = "focal"
