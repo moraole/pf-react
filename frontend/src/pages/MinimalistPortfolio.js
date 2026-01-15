@@ -224,25 +224,88 @@ const MinimalistPortfolio = () => {
       </div>
 
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center px-[7.5%]" style={{ animation: 'fadeIn 0.3s ease-out' }}>
+        <div className="fixed inset-0 z-50 flex items-end justify-center px-[7.5%]" style={{ animation: reducedMotion ? 'none' : 'fadeIn 0.3s ease-out' }}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeCaseStudy}></div>
-          <div className={`relative w-full h-[90vh] bg-white rounded-t-3xl overflow-y-auto shadow-2xl ${isClosing ? 'animate-slideDown' : 'animate-slideUp'}`}>
-            <button onClick={closeCaseStudy} className="sticky top-6 right-6 ml-auto mr-6 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors duration-200 z-10"><X size={24} className="text-slate-900" /></button>
+          <div className={`relative w-full h-[90vh] bg-white rounded-t-3xl overflow-y-auto shadow-2xl ${reducedMotion ? '' : (isClosing ? 'animate-slideDown' : 'animate-slideUp')}`}>
+            <button 
+              onClick={closeCaseStudy} 
+              className={`sticky top-6 right-6 ml-auto mr-6 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center ${reducedMotion ? '' : 'transition-colors duration-200'} z-10`}
+              aria-label="Close case study"
+            >
+              <X size={24} className="text-slate-900" />
+            </button>
             <div className="px-12 py-8 max-w-5xl mx-auto">
               <div className="mb-12">
                 <div className="flex items-center gap-4 mb-4"><span className="text-slate-500 font-mono text-sm">{selectedProject.year}</span></div>
-                <h1 className="text-5xl font-normal text-slate-900 mb-6" style={{ fontFamily: "'Times New Roman', Times, serif" }}>{selectedProject.title}</h1>
-                <p className="text-xl text-slate-600 leading-relaxed mb-8">{selectedProject.description}</p>
-                <div className="flex flex-wrap gap-2">{selectedProject.technologies.map((tech, index) => (<span key={index} className="px-4 py-2 bg-slate-100 text-slate-800 rounded-full text-sm font-medium">{tech}</span>))}</div>
+                <h1 className="text-5xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>{selectedProject.title}</h1>
+                <p className="text-xl text-slate-600 leading-relaxed mb-8" style={{ fontFamily: fontFamily }}>{selectedProject.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.technologies.map((tech, index) => (
+                    <span key={index} className="px-4 py-2 bg-slate-100 text-slate-800 rounded-full text-sm font-medium" style={{ fontFamily: fontFamily }}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-              {selectedProject.caseStudy && (<>
-                <section className="mb-12"><h2 className="text-3xl font-normal text-slate-900 mb-4" style={{ fontFamily: "'Times New Roman', Times, serif" }}>The Challenge</h2><p className="text-lg text-slate-700 leading-relaxed">{selectedProject.caseStudy.challenge}</p></section>
-                <section className="mb-12"><h2 className="text-3xl font-normal text-slate-900 mb-4" style={{ fontFamily: "'Times New Roman', Times, serif" }}>The Solution</h2><p className="text-lg text-slate-700 leading-relaxed">{selectedProject.caseStudy.solution}</p></section>
-                <section className="mb-12"><h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Key Results</h2><div className="grid md:grid-cols-2 gap-4">{selectedProject.caseStudy.results.map((result, index) => (<div key={index} className="flex items-start gap-3 p-4 bg-slate-50 rounded-lg"><span className="text-green-600 mt-1">✓</span><p className="text-slate-700">{result}</p></div>))}</div></section>
-                <section className="mb-12"><h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Technology Stack</h2><div className="space-y-3">{selectedProject.caseStudy.techStack.map((tech, index) => (<div key={index} className="flex items-start gap-3"><span className="text-slate-400">•</span><p className="text-slate-700">{tech}</p></div>))}</div></section>
-                <section className="mb-12"><h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Project Timeline</h2><div className="space-y-6">{selectedProject.caseStudy.timeline.map((phase, index) => (<div key={index} className="border-l-4 border-slate-300 pl-6 py-2"><div className="flex items-center justify-between mb-2"><h3 className="text-xl font-semibold text-slate-900">{phase.phase}</h3><span className="text-slate-500 text-sm">{phase.duration}</span></div><p className="text-slate-600">{phase.details}</p></div>))}</div></section>
-                <section><h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Lessons Learned</h2><div className="space-y-3">{selectedProject.caseStudy.lessonsLearned.map((lesson, index) => (<div key={index} className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg"><span className="text-blue-600 font-bold">→</span><p className="text-slate-700">{lesson}</p></div>))}</div></section>
-              </>)}
+              {selectedProject.caseStudy && (
+                <>
+                  <section className="mb-12">
+                    <h2 className="text-3xl font-normal text-slate-900 mb-4" style={{ fontFamily: fontFamily }}>The Challenge</h2>
+                    <p className="text-lg text-slate-700 leading-relaxed" style={{ fontFamily: fontFamily }}>{selectedProject.caseStudy.challenge}</p>
+                  </section>
+                  <section className="mb-12">
+                    <h2 className="text-3xl font-normal text-slate-900 mb-4" style={{ fontFamily: fontFamily }}>The Solution</h2>
+                    <p className="text-lg text-slate-700 leading-relaxed" style={{ fontFamily: fontFamily }}>{selectedProject.caseStudy.solution}</p>
+                  </section>
+                  <section className="mb-12">
+                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Key Results</h2>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {selectedProject.caseStudy.results.map((result, index) => (
+                        <div key={index} className="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+                          <span className="text-green-600 mt-1">✓</span>
+                          <p className="text-slate-700" style={{ fontFamily: fontFamily }}>{result}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                  <section className="mb-12">
+                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Technology Stack</h2>
+                    <div className="space-y-3">
+                      {selectedProject.caseStudy.techStack.map((tech, index) => (
+                        <div key={index} className="flex items-start gap-3">
+                          <span className="text-slate-400">•</span>
+                          <p className="text-slate-700" style={{ fontFamily: fontFamily }}>{tech}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                  <section className="mb-12">
+                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Project Timeline</h2>
+                    <div className="space-y-6">
+                      {selectedProject.caseStudy.timeline.map((phase, index) => (
+                        <div key={index} className="border-l-4 border-slate-300 pl-6 py-2">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-xl font-semibold text-slate-900" style={{ fontFamily: fontFamily }}>{phase.phase}</h3>
+                            <span className="text-slate-500 text-sm" style={{ fontFamily: fontFamily }}>{phase.duration}</span>
+                          </div>
+                          <p className="text-slate-600" style={{ fontFamily: fontFamily }}>{phase.details}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                  <section>
+                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Lessons Learned</h2>
+                    <div className="space-y-3">
+                      {selectedProject.caseStudy.lessonsLearned.map((lesson, index) => (
+                        <div key={index} className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
+                          <span className="text-blue-600 font-bold">→</span>
+                          <p className="text-slate-700" style={{ fontFamily: fontFamily }}>{lesson}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                </>
+              )}
             </div>
           </div>
         </div>
