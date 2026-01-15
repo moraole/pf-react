@@ -99,7 +99,7 @@ export const portfolioData = {
       }
     },
     {
-      id: 3,
+      id: 2,
       title: "Neural Network SMS Text Classifier",
       year: "2024",
       description: "Machine learning model for classifying SMS messages as spam or legitimate. Implements deep learning with TensorFlow and achieves high accuracy through advanced NLP techniques and neural network architectures.",
