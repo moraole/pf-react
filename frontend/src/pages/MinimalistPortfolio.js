@@ -110,26 +110,17 @@ const MinimalistPortfolio = () => {
 
   return (
     <div 
-      className={`relative min-h-screen overflow-hidden ${isDayTime ? 'bg-gradient-to-br from-sky-300 via-blue-200 to-blue-300' : 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'}`}
+      className={`relative min-h-screen overflow-hidden ${isDayTime ? 'bg-white' : 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'}`}
       style={{ transition: reducedMotion ? 'none' : 'background 2s ease' }}
     >
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }} />
 
-      {isDayTime && (
-        <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 2 }}>
-          <div className="cloud cloud1"></div>
-          <div className="cloud cloud2"></div>
-          <div className="cloud cloud3"></div>
-          <div className="cloud cloud4"></div>
-          <div className="cloud cloud5"></div>
-        </div>
-      )}
-
+      {/* Moon (night time only) */}
       <div 
         className={`absolute top-20 right-32 w-48 h-48 rounded-full ${isDayTime ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
         style={{ 
           zIndex: 3,
-          transition: 'all 2s ease',
+          transition: reducedMotion ? 'none' : 'all 2s ease',
           boxShadow: '0 0 60px 30px rgba(255, 255, 255, 0.3), inset -10px -10px 30px rgba(0, 0, 0, 0.2)',
           background: 'radial-gradient(circle at 30% 30%, #f8f9fa 0%, #e9ecef 40%, #adb5bd 100%)'
         }}
@@ -137,29 +128,6 @@ const MinimalistPortfolio = () => {
         <div className="absolute top-8 left-12 w-8 h-8 rounded-full bg-gray-400 opacity-30"></div>
         <div className="absolute top-16 left-20 w-6 h-6 rounded-full bg-gray-400 opacity-20"></div>
         <div className="absolute bottom-12 right-16 w-10 h-10 rounded-full bg-gray-400 opacity-25"></div>
-      </div>
-
-      <div 
-        className={`absolute top-20 right-32 w-48 h-48 rounded-full ${isDayTime ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-full opacity-0 scale-50'}`}
-        style={{ 
-          zIndex: 3,
-          transition: 'all 2s ease',
-          background: 'radial-gradient(circle at 40% 40%, #fff9e6 0%, #ffd54f 50%, #ffb300 100%)',
-          boxShadow: '0 0 80px 40px rgba(255, 193, 7, 0.6), 0 0 120px 60px rgba(255, 235, 59, 0.4), inset -5px -5px 20px rgba(255, 152, 0, 0.3)'
-        }}
-      >
-        <div className="absolute inset-0 animate-spin-slow">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute top-1/2 left-1/2 w-1 h-24 bg-gradient-to-t from-transparent to-yellow-300 opacity-40"
-              style={{
-                transform: `rotate(${i * 30}deg) translateX(-50%)`,
-                transformOrigin: '50% 0'
-              }}
-            ></div>
-          ))}
-        </div>
       </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-between px-16 py-12">
