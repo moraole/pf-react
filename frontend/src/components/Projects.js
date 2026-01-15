@@ -12,14 +12,14 @@ const Projects = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="projects" className="py-24 px-6">
+    <section id="projects" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Featured Projects
           </h2>
           <div className="w-20 h-1 bg-slate-900 mx-auto mb-6"></div>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             A showcase of my work spanning full-stack development, machine learning, and database systems. Click on any project to explore the detailed case study.
           </p>
         </div>
