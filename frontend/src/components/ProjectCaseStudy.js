@@ -25,14 +25,14 @@ const ProjectCaseStudy = () => {
   const { caseStudy } = project;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-100">
       {/* Header */}
       <div className="bg-slate-900 text-white py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <Button
             variant="ghost"
             onClick={() => navigate('/')}
-            className="text-white hover:text-slate-300 mb-6"
+            className="text-white hover:text-slate-200 hover:bg-white/10 mb-6"
           >
             <ArrowLeft className="mr-2" size={20} />
             Back to Portfolio
