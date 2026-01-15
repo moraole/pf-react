@@ -52,14 +52,14 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 px-6 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+    <section id="contact" className="py-24 px-6 bg-slate-100">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Get In Touch
           </h2>
           <div className="w-20 h-1.5 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             Have a project in mind? Let's work together to bring your ideas to life.
           </p>
         </div>
