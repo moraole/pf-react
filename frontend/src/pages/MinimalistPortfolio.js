@@ -6,19 +6,11 @@ import { useAccessibility } from '../contexts/AccessibilityContext';
 const MinimalistPortfolio = () => {
   const canvasRef = useRef(null);
   const { projects } = portfolioData;
-  const { reducedMotion, theme } = useAccessibility();
+  const { reducedMotion, theme, fontSize, dyslexiaFont, enhancedFocus } = useAccessibility();
   const [selectedProject, setSelectedProject] = useState(null);
-  const [hoveredLetter, setHoveredLetter] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
 
   const isDayTime = theme === 'light';
-
-  const nameLetters = [
-    { letter: 'E', fullName: 'rick' },
-    { letter: 'E', fullName: 'mmanuel' },
-    { letter: 'M', fullName: 'ora' },
-    { letter: 'O', fullName: 'lmedo' }
-  ];
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -114,10 +106,12 @@ const MinimalistPortfolio = () => {
   const textColorMuted = isDayTime ? 'text-slate-500' : 'text-white/50';
   const textColorSubtle = isDayTime ? 'text-slate-400' : 'text-white/40';
 
+  const fontFamily = dyslexiaFont ? "'OpenDyslexic', 'Times New Roman', Times, serif" : "'Times New Roman', Times, serif";
+
   return (
     <div 
       className={`relative min-h-screen overflow-hidden ${isDayTime ? 'bg-gradient-to-br from-sky-300 via-blue-200 to-blue-300' : 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'}`}
-      style={{ transition: 'background 2s ease' }}
+      style={{ transition: reducedMotion ? 'none' : 'background 2s ease' }}
     >
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }} />
 
