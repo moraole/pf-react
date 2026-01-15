@@ -33,18 +33,20 @@ const AccessibilityMenu = () => {
       {/* Floating accessibility button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-slate-900 text-white shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-[9999] w-14 h-14 rounded-full bg-slate-900 text-white shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
         aria-label="Accessibility Settings"
+        style={{ zIndex: 9999 }}
       >
         {isOpen ? <X size={24} /> : <Settings size={24} />}
       </button>
 
       {/* Accessibility panel */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={() => setIsOpen(false)}>
+        <div className="fixed inset-0 z-[9998] bg-black/50 backdrop-blur-sm" onClick={() => setIsOpen(false)}>
           <Card
-            className="fixed right-6 bottom-24 w-96 max-h-[80vh] overflow-y-auto shadow-2xl border-none"
+            className="fixed right-6 bottom-24 w-96 max-h-[80vh] overflow-y-auto shadow-2xl border-none z-[9999]"
             onClick={(e) => e.stopPropagation()}
+            style={{ zIndex: 9999 }}
           >
             <CardHeader className="border-b">
               <CardTitle className="flex items-center gap-2">
