@@ -85,7 +85,7 @@ const Projects = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-2">
                   {project.title}
                 </h3>
-                <p className="text-slate-600 mb-4 line-clamp-3">
+                <p className="text-slate-800 mb-4 line-clamp-3 font-medium">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -93,13 +93,13 @@ const Projects = () => {
                     <Badge
                       key={index}
                       variant="secondary"
-                      className="bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      className="bg-slate-800 text-white hover:bg-slate-700 font-medium"
                     >
                       {tech}
                     </Badge>
                   ))}
                   {project.technologies.length > 4 && (
-                    <Badge variant="secondary" className="bg-slate-100 text-slate-700">
+                    <Badge variant="secondary" className="bg-slate-800 text-white font-medium">
                       +{project.technologies.length - 4}
                     </Badge>
                   )}
