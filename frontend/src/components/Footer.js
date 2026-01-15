@@ -10,7 +10,7 @@ const Footer = () => {
     { icon: <Github size={20} />, url: social.github, label: 'GitHub' },
     { icon: <Linkedin size={20} />, url: social.linkedin, label: 'LinkedIn' },
     { icon: <Twitter size={20} />, url: social.twitter, label: 'Twitter' }
-  ];
+  ].filter(link => link.url && link.url !== '#');
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -24,28 +24,30 @@ const Footer = () => {
             className="text-2xl font-bold cursor-pointer hover:text-slate-300 transition-colors duration-200"
             onClick={scrollToTop}
           >
-            Portfolio
+            Erick Mora
           </div>
 
-          <div className="flex gap-6">
-            {socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.label}
-                className="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all duration-300 hover:scale-110"
-              >
-                {link.icon}
-              </a>
-            ))}
-          </div>
+          {socialLinks.length > 0 && (
+            <div className="flex gap-6">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all duration-300 hover:scale-110"
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
+          )}
 
           <div className="flex items-center gap-2 text-slate-400">
             <span>Made with</span>
             <Heart size={16} className="text-red-500 fill-red-500" />
-            <span>© {currentYear} All rights reserved</span>
+            <span>© {currentYear} Erick Emmanuel Mora Olmedo</span>
           </div>
         </div>
       </div>
