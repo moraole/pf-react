@@ -268,7 +268,7 @@ const MinimalistPortfolio = () => {
                     <div className="space-y-3">
                       {selectedProject.caseStudy.lessonsLearned.map((lesson, index) => (
                         <div key={index} className={`flex items-start gap-3 p-4 ${isDayTime ? 'bg-blue-50' : 'bg-slate-700'} rounded-lg`}>
-                          <span className={isDayTime ? 'text-blue-600' : 'text-blue-400'} className="font-bold">→</span>
+                          <span className={`font-bold ${isDayTime ? 'text-blue-600' : 'text-blue-400'}`}>→</span>
                           <p className={isDayTime ? 'text-slate-700' : 'text-slate-200'} style={{ fontFamily: fontFamily }}>{lesson}</p>
                         </div>
                       ))}
