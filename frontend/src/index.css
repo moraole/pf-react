@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* OpenDyslexic font for accessibility */
+@import url('https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 body {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -9,6 +13,7 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
@@ -16,8 +21,49 @@ code {
         monospace;
 }
 
+/* Dyslexia-friendly font */
+[data-dyslexia-font="true"] {
+    font-family: 'OpenDyslexic', 'Inter', sans-serif !important;
+}
+
+[data-dyslexia-font="true"] * {
+    font-family: 'OpenDyslexic', 'Inter', sans-serif !important;
+}
+
+/* Font size variations */
+[data-font-size="small"] {
+    font-size: 14px;
+}
+
+[data-font-size="medium"] {
+    font-size: 16px;
+}
+
+[data-font-size="large"] {
+    font-size: 18px;
+}
+
+[data-font-size="extra-large"] {
+    font-size: 20px;
+}
+
+/* Reduced motion */
+[data-reduced-motion="true"] * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+/* Enhanced focus indicators */
+[data-enhanced-focus="true"] *:focus-visible {
+    outline: 4px solid #3b82f6 !important;
+    outline-offset: 4px !important;
+}
+
+
 @layer base {
-    :root {
+  /* Light Theme */
+  :root, [data-theme="light"] {
         --background: 0 0% 100%;
         --foreground: 222 47% 11%;
         --card: 0 0% 100%;
@@ -44,7 +90,9 @@ code {
         --chart-5: 212 97% 87%;
         --radius: 0.75rem;
     }
-    .dark {
+    
+  /* Dark Theme */
+  [data-theme="dark"], .dark {
         --background: 222 47% 11%;
         --foreground: 210 40% 98%;
         --card: 222 47% 11%;
@@ -69,6 +117,29 @@ code {
         --chart-3: 216 92% 60%;
         --chart-4: 210 98% 78%;
         --chart-5: 212 97% 87%;
+    }
+    
+  /* High Contrast Theme */
+  [data-theme="high-contrast"] {
+        --background: 0 0% 0%;
+        --foreground: 0 0% 100%;
+        --card: 0 0% 0%;
+        --card-foreground: 0 0% 100%;
+        --popover: 0 0% 0%;
+        --popover-foreground: 0 0% 100%;
+        --primary: 0 0% 100%;
+        --primary-foreground: 0 0% 0%;
+        --secondary: 0 0% 20%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 0 0% 20%;
+        --muted-foreground: 0 0% 90%;
+        --accent: 60 100% 50%;
+        --accent-foreground: 0 0% 0%;
+        --destructive: 0 100% 50%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 0 0% 100%;
+        --input: 0 0% 100%;
+        --ring: 60 100% 50%;
     }
 }
 
