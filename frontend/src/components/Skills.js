@@ -41,7 +41,7 @@ const Skills = () => {
                         <h4 className="text-lg font-semibold text-slate-900">
                           {skill.name}
                         </h4>
-                        <span className="text-sm font-medium text-slate-600">
+                        <span className="text-sm font-bold text-slate-900">
                           {skill.level}%
                         </span>
                       </div>
