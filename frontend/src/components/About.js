@@ -64,7 +64,7 @@ const About = () => {
                   </div>
                   <div>
                     <p className="text-3xl font-bold text-slate-900 group-hover:scale-105 transition-transform duration-300">{stat.value}</p>
-                    <p className="text-slate-600 font-medium">{stat.label}</p>
+                    <p className="text-slate-800 font-semibold">{stat.label}</p>
                   </div>
                 </CardContent>
               </Card>
