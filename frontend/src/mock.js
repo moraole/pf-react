@@ -103,7 +103,7 @@ export const portfolioData = {
       title: "Neural Network SMS Text Classifier",
       year: "2024",
       description: "Machine learning model for classifying SMS messages as spam or legitimate. Implements deep learning with TensorFlow and achieves high accuracy through advanced NLP techniques and neural network architectures.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80",
       technologies: ["Python", "TensorFlow", "Keras", "NLP", "Scikit-learn"],
       liveLink: "#",
       githubLink: "https://github.com/moraole",
