@@ -35,7 +35,7 @@ export const portfolioData = {
       title: "League Of Legends Player Comparison App",
       year: "2025",
       description: "Advanced analytics platform for comparing League of Legends player statistics. Features real-time data visualization, match history analysis, and performance metrics comparison across multiple players.",
-      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&q=80",
       technologies: ["React", "Python", "Riot API", "Chart.js", "PostgreSQL"],
       liveLink: "#",
       githubLink: "https://github.com/moraole",
