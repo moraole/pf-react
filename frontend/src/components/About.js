@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Users, Briefcase } from 'lucide-react';
+import { Award, Layers, Code } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { portfolioData } from '../mock';
 
@@ -8,7 +8,7 @@ const About = () => {
 
   const stats = [
     {
-      icon: <Briefcase className="w-8 h-8" />,
+      icon: <Code className="w-8 h-8" />,
       label: 'Years Experience',
       value: about.yearsExperience
     },
@@ -18,9 +18,9 @@ const About = () => {
       value: about.projectsCompleted
     },
     {
-      icon: <Users className="w-8 h-8" />,
-      label: 'Happy Clients',
-      value: about.happyClients
+      icon: <Layers className="w-8 h-8" />,
+      label: 'Technologies Used',
+      value: about.technologiesUsed
     }
   ];
 
