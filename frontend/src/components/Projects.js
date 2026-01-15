@@ -52,7 +52,27 @@ const Projects = () => {
                       <FileText size={16} className="mr-1" />
                       Case Study
                     </Button>
-                  )}\n                  {project.liveLink !== '#' && (\n                    <Button\n                      size=\"sm\"\n                      variant=\"secondary\"\n                      onClick={() => window.open(project.liveLink, '_blank')}\n                      className=\"bg-white text-slate-900 hover:bg-slate-100\"\n                    >\n                      <ExternalLink size={16} />\n                    </Button>\n                  )}\n                  {project.githubLink !== '#' && (\n                    <Button\n                      size=\"sm\"\n                      variant=\"secondary\"\n                      onClick={() => window.open(project.githubLink, '_blank')}\n                      className=\"bg-white text-slate-900 hover:bg-slate-100\"\n                    >\n                      <Github size={16} />\n                    </Button>\n                  )}
+                  )}
+                  {project.liveLink !== '#' && (
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => window.open(project.liveLink, '_blank')}
+                      className="bg-white text-slate-900 hover:bg-slate-100"
+                    >
+                      <ExternalLink size={16} />
+                    </Button>
+                  )}
+                  {project.githubLink !== '#' && (
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => window.open(project.githubLink, '_blank')}
+                      className="bg-white text-slate-900 hover:bg-slate-100"
+                    >
+                      <Github size={16} />
+                    </Button>
+                  )}
                 </div>
                 {project.year && (
                   <div className="absolute top-4 right-4 bg-slate-900 text-white px-3 py-1 rounded-full text-sm font-medium">
