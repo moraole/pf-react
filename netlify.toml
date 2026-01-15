@@ -9,8 +9,5 @@
   status = 200
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   YARN_VERSION = "1.22.22"
-  
-[context.production.environment]
-  NETLIFY_BUILD_IMAGE = "focal"
