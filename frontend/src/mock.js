@@ -211,13 +211,13 @@ export const portfolioData = {
     }
   ],
   contact: {
-    email: "erickmoraolmedo@gmail.com",
-    phone: "+1 (555) 123-4567",
-    location: "United States"
+    email: "mora.o.erick@gmail.com",
+    phone: "(425) 372-6802",
+    location: "Seattle, WA"
   },
   social: {
     github: "https://github.com/moraole",
-    linkedin: "https://linkedin.com/in/erick-mora",
+    linkedin: "https://www.linkedin.com/in/erickmoraolmedo/",
     twitter: "https://twitter.com/erickmo",
     portfolio: "https://erickmo.netlify.app/"
   }
