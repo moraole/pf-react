@@ -28,7 +28,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 px-6 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+    <section id="about" className="py-24 px-6 bg-slate-100">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
@@ -39,7 +39,7 @@ const About = () => {
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 animate-fade-in-up">
-            <p className="text-lg text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-700 leading-relaxed">
               {about.description}
             </p>
             <div className="flex items-center gap-4 pt-4">
