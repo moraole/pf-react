@@ -33,7 +33,7 @@ const MinimalistPortfolio = () => {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3;
+        this.size = Math.random() * 5 + 2; // Larger stars (2-7px)
         this.speedX = (Math.random() - 0.5) * 0.15;
         this.speedY = (Math.random() - 0.5) * 0.15;
         this.opacity = Math.random() * 0.7 + 0.3;
@@ -50,18 +50,18 @@ const MinimalistPortfolio = () => {
       }
 
       draw() {
-        if (!isDayTime) {
-          ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        // Draw stars - black in day mode, white in night mode
+        const color = isDayTime ? `rgba(0, 0, 0, ${this.opacity * 0.6})` : `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
     const initStars = () => {
       particles = [];
-      const numberOfStars = Math.floor((canvas.width * canvas.height) / 15000);
+      const numberOfStars = Math.floor((canvas.width * canvas.height) / 12000); // More stars
       for (let i = 0; i < numberOfStars; i++) {
         particles.push(new Star());
       }
