@@ -82,18 +82,18 @@ const Contact = () => {
                         {info.icon}
                       </div>
                       <div>
-                        <p className="text-sm text-slate-500 font-medium">
+                        <p className="text-sm text-slate-600 font-semibold">
                           {info.label}
                         </p>
                         {info.link ? (
                           <a
                             href={info.link}
-                            className="text-slate-900 hover:text-slate-700 transition-colors duration-200 font-medium"
+                            className="text-slate-900 hover:text-slate-700 transition-colors duration-200 font-semibold"
                           >
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-slate-900 font-medium">{info.value}</p>
+                          <p className="text-slate-900 font-semibold">{info.value}</p>
                         )}
                       </div>
                     </CardContent>
