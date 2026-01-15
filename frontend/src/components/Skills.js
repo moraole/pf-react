@@ -14,14 +14,14 @@ const Skills = () => {
   }));
 
   return (
-    <section id="skills" className="py-24 px-6 bg-slate-50">
+    <section id="skills" className="py-24 px-6 bg-slate-200">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Skills & Expertise
           </h2>
           <div className="w-20 h-1 bg-slate-900 mx-auto mb-6"></div>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             Technologies and tools I work with to bring ideas to life.
           </p>
         </div>
