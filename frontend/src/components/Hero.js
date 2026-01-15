@@ -21,16 +21,16 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="text-center space-y-8">
           <div className="space-y-4 animate-fade-in">
-            <p className="text-lg text-slate-300 font-medium">Hello, I'm</p>
-            <h1 className="text-5xl md:text-7xl font-bold">
+            <p className="text-lg text-slate-200 font-medium">Hello, I'm</p>
+            <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg">
               {hero.name}
             </h1>
-            <p className="text-2xl md:text-3xl text-slate-300 font-medium">
+            <p className="text-2xl md:text-3xl text-slate-100 font-medium">
               {hero.title}
             </p>
           </div>
 
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
             {hero.description}
           </p>
 
@@ -38,7 +38,7 @@ const Hero = () => {
             <Button
               size="lg"
               onClick={() => scrollToSection('projects')}
-              className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
+              className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-6 text-lg transition-all duration-300 hover:scale-105 font-semibold shadow-xl"
             >
               View My Work
               <ArrowRight className="ml-2" size={20} />
@@ -47,7 +47,7 @@ const Hero = () => {
               size="lg"
               variant="outline"
               onClick={() => window.open(hero.resumeLink, '_blank')}
-              className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
+              className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg transition-all duration-300 hover:scale-105 font-semibold"
             >
               <Download className="mr-2" size={20} />
               Download Resume
@@ -61,7 +61,8 @@ const Hero = () => {
                 href={social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 text-white"
+                aria-label="GitHub"
               >
                 <Github size={24} />
               </a>
@@ -71,7 +72,8 @@ const Hero = () => {
                 href={social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 text-white"
+                aria-label="LinkedIn"
               >
                 <Linkedin size={24} />
               </a>
@@ -81,7 +83,8 @@ const Hero = () => {
                 href={social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 text-white"
+                aria-label="Twitter"
               >
                 <Twitter size={24} />
               </a>
@@ -92,8 +95,8 @@ const Hero = () => {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>
