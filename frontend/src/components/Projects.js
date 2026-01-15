@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
-import { Card, CardContent, CardFooter } from './ui/card';
+import { useNavigate } from 'react-router-dom';
+import { ExternalLink, Github, FileText } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { portfolioData } from '../mock';
@@ -8,6 +9,7 @@ import { portfolioData } from '../mock';
 const Projects = () => {
   const { projects } = portfolioData;
   const [hoveredId, setHoveredId] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <section id="projects" className="py-24 px-6">
@@ -18,7 +20,7 @@ const Projects = () => {
           </h2>
           <div className="w-20 h-1 bg-slate-900 mx-auto mb-6"></div>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            A showcase of my recent work and projects. Each project represents a unique challenge and solution.
+            A showcase of my work spanning full-stack development, machine learning, and database systems. Click on any project to explore the detailed case study.
           </p>
         </div>
 
@@ -37,27 +39,26 @@ const Projects = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div
-                  className={`absolute inset-0 bg-slate-900/80 flex items-center justify-center gap-4 transition-opacity duration-300 ${
+                  className={`absolute inset-0 bg-slate-900/90 flex items-center justify-center gap-3 transition-opacity duration-300 ${
                     hoveredId === project.id ? 'opacity-100' : 'opacity-0'
                   }`}
                 >
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => window.open(project.liveLink, '_blank')}
-                    className="bg-white text-slate-900 hover:bg-slate-100"
-                  >
-                    <ExternalLink size={16} />
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => window.open(project.githubLink, '_blank')}
-                    className="bg-white text-slate-900 hover:bg-slate-100"
-                  >
-                    <Github size={16} />
-                  </Button>
+                  {project.hasCaseStudy && (
+                    <Button
+                      size="sm"
+                      onClick={() => navigate(`/project/${project.id}`)}
+                      className="bg-white text-slate-900 hover:bg-slate-100"
+                    >
+                      <FileText size={16} className="mr-1" />
+                      Case Study
+                    </Button>
+                  )}\n                  {project.liveLink !== '#' && (\n                    <Button\n                      size=\"sm\"\n                      variant=\"secondary\"\n                      onClick={() => window.open(project.liveLink, '_blank')}\n                      className=\"bg-white text-slate-900 hover:bg-slate-100\"\n                    >\n                      <ExternalLink size={16} />\n                    </Button>\n                  )}\n                  {project.githubLink !== '#' && (\n                    <Button\n                      size=\"sm\"\n                      variant=\"secondary\"\n                      onClick={() => window.open(project.githubLink, '_blank')}\n                      className=\"bg-white text-slate-900 hover:bg-slate-100\"\n                    >\n                      <Github size={16} />\n                    </Button>\n                  )}
                 </div>
+                {project.year && (
+                  <div className="absolute top-4 right-4 bg-slate-900 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {project.year}
+                  </div>
+                )}
               </div>
 
               <CardContent className="p-6">
@@ -68,7 +69,7 @@ const Projects = () => {
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, index) => (
+                  {project.technologies.slice(0, 4).map((tech, index) => (
                     <Badge
                       key={index}
                       variant="secondary"
@@ -77,6 +78,11 @@ const Projects = () => {
                       {tech}
                     </Badge>
                   ))}
+                  {project.technologies.length > 4 && (
+                    <Badge variant="secondary" className="bg-slate-100 text-slate-700">
+                      +{project.technologies.length - 4}
+                    </Badge>
+                  )}
                 </div>
               </CardContent>
             </Card>
