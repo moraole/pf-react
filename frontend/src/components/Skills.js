@@ -5,6 +5,13 @@ import { Progress } from './ui/progress';
 
 const Skills = () => {
   const { skills } = portfolioData;
+  
+  // Group skills by category
+  const categories = [...new Set(skills.map(skill => skill.category))];
+  const groupedSkills = categories.map(category => ({
+    category,
+    skills: skills.filter(skill => skill.category === category)
+  }));
 
   return (
     <section id="skills" className="py-24 px-6 bg-slate-50">
@@ -19,24 +26,31 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skills.map((skill, index) => (
-            <Card
-              key={index}
-              className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    {skill.name}
-                  </h3>
-                  <span className="text-sm font-medium text-slate-600">
-                    {skill.level}%
-                  </span>
-                </div>
-                <Progress value={skill.level} className="h-2" />
-              </CardContent>
-            </Card>
+        <div className="space-y-12">
+          {groupedSkills.map((group, groupIndex) => (
+            <div key={groupIndex}>
+              <h3 className="text-2xl font-bold text-slate-900 mb-6">{group.category}</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {group.skills.map((skill, index) => (
+                  <Card
+                    key={index}
+                    className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex justify-between items-center mb-3">
+                        <h4 className="text-lg font-semibold text-slate-900">
+                          {skill.name}
+                        </h4>
+                        <span className="text-sm font-medium text-slate-600">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <Progress value={skill.level} className="h-2" />
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
