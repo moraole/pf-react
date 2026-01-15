@@ -194,22 +194,24 @@ const MinimalistPortfolio = () => {
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-end justify-center px-[7.5%]" style={{ animation: reducedMotion ? 'none' : 'fadeIn 0.3s ease-out' }}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeCaseStudy}></div>
-          <div className={`relative w-full h-[90vh] bg-white rounded-t-3xl overflow-y-auto shadow-2xl ${reducedMotion ? '' : (isClosing ? 'animate-slideDown' : 'animate-slideUp')}`}>
+          <div className={`relative w-full h-[90vh] ${isDayTime ? 'bg-white text-slate-900' : 'bg-slate-800 text-white'} rounded-t-3xl overflow-y-auto shadow-2xl ${reducedMotion ? '' : (isClosing ? 'animate-slideDown' : 'animate-slideUp')}`} style={{ transition: reducedMotion ? 'none' : 'background-color 2s ease, color 2s ease' }}>
             <button 
               onClick={closeCaseStudy} 
-              className={`sticky top-6 right-6 ml-auto mr-6 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center ${reducedMotion ? '' : 'transition-colors duration-200'} z-10`}
+              className={`sticky top-6 right-6 ml-auto mr-6 w-10 h-10 rounded-full ${isDayTime ? 'bg-slate-100 hover:bg-slate-200' : 'bg-slate-700 hover:bg-slate-600'} flex items-center justify-center ${reducedMotion ? '' : 'transition-colors duration-200'} z-10`}
               aria-label="Close case study"
             >
-              <X size={24} className="text-slate-900" />
+              <X size={24} className={isDayTime ? 'text-slate-900' : 'text-white'} />
             </button>
             <div className="px-12 py-8 max-w-5xl mx-auto">
               <div className="mb-12">
-                <div className="flex items-center gap-4 mb-4"><span className="text-slate-500 font-mono text-sm">{selectedProject.year}</span></div>
-                <h1 className="text-5xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>{selectedProject.title}</h1>
-                <p className="text-xl text-slate-600 leading-relaxed mb-8" style={{ fontFamily: fontFamily }}>{selectedProject.description}</p>
+                <div className="flex items-center gap-4 mb-4">
+                  <span className={`${isDayTime ? 'text-slate-500' : 'text-slate-400'} font-mono text-sm`}>{selectedProject.year}</span>
+                </div>
+                <h1 className={`text-5xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-6`} style={{ fontFamily: fontFamily }}>{selectedProject.title}</h1>
+                <p className={`text-xl ${isDayTime ? 'text-slate-600' : 'text-slate-300'} leading-relaxed mb-8`} style={{ fontFamily: fontFamily }}>{selectedProject.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech, index) => (
-                    <span key={index} className="px-4 py-2 bg-slate-100 text-slate-800 rounded-full text-sm font-medium" style={{ fontFamily: fontFamily }}>
+                    <span key={index} className={`px-4 py-2 ${isDayTime ? 'bg-slate-100 text-slate-800' : 'bg-slate-700 text-white'} rounded-full text-sm font-medium`} style={{ fontFamily: fontFamily }}>
                       {tech}
                     </span>
                   ))}
@@ -218,56 +220,56 @@ const MinimalistPortfolio = () => {
               {selectedProject.caseStudy && (
                 <>
                   <section className="mb-12">
-                    <h2 className="text-3xl font-normal text-slate-900 mb-4" style={{ fontFamily: fontFamily }}>The Challenge</h2>
-                    <p className="text-lg text-slate-700 leading-relaxed" style={{ fontFamily: fontFamily }}>{selectedProject.caseStudy.challenge}</p>
+                    <h2 className={`text-3xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-4`} style={{ fontFamily: fontFamily }}>The Challenge</h2>
+                    <p className={`text-lg ${isDayTime ? 'text-slate-700' : 'text-slate-300'} leading-relaxed`} style={{ fontFamily: fontFamily }}>{selectedProject.caseStudy.challenge}</p>
                   </section>
                   <section className="mb-12">
-                    <h2 className="text-3xl font-normal text-slate-900 mb-4" style={{ fontFamily: fontFamily }}>The Solution</h2>
-                    <p className="text-lg text-slate-700 leading-relaxed" style={{ fontFamily: fontFamily }}>{selectedProject.caseStudy.solution}</p>
+                    <h2 className={`text-3xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-4`} style={{ fontFamily: fontFamily }}>The Solution</h2>
+                    <p className={`text-lg ${isDayTime ? 'text-slate-700' : 'text-slate-300'} leading-relaxed`} style={{ fontFamily: fontFamily }}>{selectedProject.caseStudy.solution}</p>
                   </section>
                   <section className="mb-12">
-                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Key Results</h2>
+                    <h2 className={`text-3xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-6`} style={{ fontFamily: fontFamily }}>Key Results</h2>
                     <div className="grid md:grid-cols-2 gap-4">
                       {selectedProject.caseStudy.results.map((result, index) => (
-                        <div key={index} className="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
-                          <span className="text-green-600 mt-1">✓</span>
-                          <p className="text-slate-700" style={{ fontFamily: fontFamily }}>{result}</p>
+                        <div key={index} className={`flex items-start gap-3 p-4 ${isDayTime ? 'bg-slate-50' : 'bg-slate-700'} rounded-lg`}>
+                          <span className="text-green-500 mt-1">✓</span>
+                          <p className={isDayTime ? 'text-slate-700' : 'text-slate-200'} style={{ fontFamily: fontFamily }}>{result}</p>
                         </div>
                       ))}
                     </div>
                   </section>
                   <section className="mb-12">
-                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Technology Stack</h2>
+                    <h2 className={`text-3xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-6`} style={{ fontFamily: fontFamily }}>Technology Stack</h2>
                     <div className="space-y-3">
                       {selectedProject.caseStudy.techStack.map((tech, index) => (
                         <div key={index} className="flex items-start gap-3">
-                          <span className="text-slate-400">•</span>
-                          <p className="text-slate-700" style={{ fontFamily: fontFamily }}>{tech}</p>
+                          <span className={isDayTime ? 'text-slate-400' : 'text-slate-500'}>•</span>
+                          <p className={isDayTime ? 'text-slate-700' : 'text-slate-300'} style={{ fontFamily: fontFamily }}>{tech}</p>
                         </div>
                       ))}
                     </div>
                   </section>
                   <section className="mb-12">
-                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Project Timeline</h2>
+                    <h2 className={`text-3xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-6`} style={{ fontFamily: fontFamily }}>Project Timeline</h2>
                     <div className="space-y-6">
                       {selectedProject.caseStudy.timeline.map((phase, index) => (
-                        <div key={index} className="border-l-4 border-slate-300 pl-6 py-2">
+                        <div key={index} className={`border-l-4 ${isDayTime ? 'border-slate-300' : 'border-slate-600'} pl-6 py-2`}>
                           <div className="flex items-center justify-between mb-2">
-                            <h3 className="text-xl font-semibold text-slate-900" style={{ fontFamily: fontFamily }}>{phase.phase}</h3>
-                            <span className="text-slate-500 text-sm" style={{ fontFamily: fontFamily }}>{phase.duration}</span>
+                            <h3 className={`text-xl font-semibold ${isDayTime ? 'text-slate-900' : 'text-white'}`} style={{ fontFamily: fontFamily }}>{phase.phase}</h3>
+                            <span className={`${isDayTime ? 'text-slate-500' : 'text-slate-400'} text-sm`} style={{ fontFamily: fontFamily }}>{phase.duration}</span>
                           </div>
-                          <p className="text-slate-600" style={{ fontFamily: fontFamily }}>{phase.details}</p>
+                          <p className={isDayTime ? 'text-slate-600' : 'text-slate-300'} style={{ fontFamily: fontFamily }}>{phase.details}</p>
                         </div>
                       ))}
                     </div>
                   </section>
                   <section>
-                    <h2 className="text-3xl font-normal text-slate-900 mb-6" style={{ fontFamily: fontFamily }}>Lessons Learned</h2>
+                    <h2 className={`text-3xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-6`} style={{ fontFamily: fontFamily }}>Lessons Learned</h2>
                     <div className="space-y-3">
                       {selectedProject.caseStudy.lessonsLearned.map((lesson, index) => (
-                        <div key={index} className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                          <span className="text-blue-600 font-bold">→</span>
-                          <p className="text-slate-700" style={{ fontFamily: fontFamily }}>{lesson}</p>
+                        <div key={index} className={`flex items-start gap-3 p-4 ${isDayTime ? 'bg-blue-50' : 'bg-slate-700'} rounded-lg`}>
+                          <span className={isDayTime ? 'text-blue-600' : 'text-blue-400'} className="font-bold">→</span>
+                          <p className={isDayTime ? 'text-slate-700' : 'text-slate-200'} style={{ fontFamily: fontFamily }}>{lesson}</p>
                         </div>
                       ))}
                     </div>
