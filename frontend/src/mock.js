@@ -169,7 +169,7 @@ export const portfolioData = {
       }
     },
     {
-      id: 4,
+      id: 3,
       title: "WorldCup Database using PostgreSQL",
       year: "2023",
       description: "Comprehensive relational database system for FIFA World Cup data. Features complex queries, normalized schema design, and advanced SQL operations for analyzing historical tournament statistics and match data.",
