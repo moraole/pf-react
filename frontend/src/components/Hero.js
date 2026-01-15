@@ -3,6 +3,7 @@ import { ArrowRight, Download, Github, Linkedin, Twitter } from 'lucide-react';
 import { Button } from './ui/button';
 import { portfolioData } from '../mock';
 import ParticlesBackground from './ParticlesBackground';
+import TechStackBadge from './TechStackBadge';
 
 const Hero = () => {
   const { hero, social } = portfolioData;
@@ -17,6 +18,7 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
       <ParticlesBackground />
+      <TechStackBadge />
       
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="text-center space-y-8">
