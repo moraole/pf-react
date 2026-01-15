@@ -52,20 +52,20 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 px-6">
+    <section id="contact" className="py-24 px-6 bg-gradient-to-br from-slate-50 via-white to-slate-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Get In Touch
           </h2>
-          <div className="w-20 h-1 bg-slate-900 mx-auto mb-6"></div>
+          <div className="w-20 h-1.5 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 mx-auto rounded-full mb-6"></div>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Have a project in mind? Let's work together to bring your ideas to life.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade-in-up">
             <div>
               <h3 className="text-2xl font-bold text-slate-900 mb-6">
                 Contact Information
@@ -74,10 +74,13 @@ const Contact = () => {
                 {contactInfo.map((info, index) => (
                   <Card
                     key={index}
-                    className="border-none shadow-md hover:shadow-lg transition-all duration-300"
+                    className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group overflow-hidden"
                   >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="text-slate-900">{info.icon}</div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-900 to-slate-700 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <CardContent className="p-5 flex items-center gap-4 relative">
+                      <div className="p-2.5 rounded-lg bg-slate-100 group-hover:bg-slate-900 text-slate-900 group-hover:text-white transition-all duration-300 transform group-hover:scale-110">
+                        {info.icon}
+                      </div>
                       <div>
                         <p className="text-sm text-slate-500 font-medium">
                           {info.label}
@@ -85,12 +88,12 @@ const Contact = () => {
                         {info.link ? (
                           <a
                             href={info.link}
-                            className="text-slate-900 hover:text-slate-700 transition-colors duration-200"
+                            className="text-slate-900 hover:text-slate-700 transition-colors duration-200 font-medium"
                           >
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-slate-900">{info.value}</p>
+                          <p className="text-slate-900 font-medium">{info.value}</p>
                         )}
                       </div>
                     </CardContent>
@@ -100,8 +103,8 @@ const Contact = () => {
             </div>
           </div>
 
-          <div>
-            <Card className="border-none shadow-lg">
+          <div className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+            <Card className="border-none shadow-xl">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
@@ -112,7 +115,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="h-12"
+                      className="h-12 border-slate-200 focus:border-slate-900 transition-colors duration-300"
                     />
                   </div>
                   <div>
@@ -123,7 +126,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="h-12"
+                      className="h-12 border-slate-200 focus:border-slate-900 transition-colors duration-300"
                     />
                   </div>
                   <div>
@@ -134,7 +137,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="h-12"
+                      className="h-12 border-slate-200 focus:border-slate-900 transition-colors duration-300"
                     />
                   </div>
                   <div>
@@ -145,12 +148,12 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       rows={5}
-                      className="resize-none"
+                      className="resize-none border-slate-200 focus:border-slate-900 transition-colors duration-300"
                     />
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white h-12 text-lg transition-all duration-300 hover:scale-105"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white h-12 text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl"
                   >
                     Send Message
                     <Send className="ml-2" size={18} />
