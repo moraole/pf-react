@@ -25,17 +25,14 @@ const MinimalistPortfolio = () => {
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // Reinitialize stars on resize to fill the new canvas area
-      initStars();
+      initParticles();
     };
 
-    // Draw a 4-pointed star shape
-    const drawStar = (x, y, size, opacity, isDayMode) => {
-      const color = isDayMode ? `rgba(0, 0, 0, ${opacity * 0.25})` : `rgba(255, 255, 255, ${opacity * 0.4})`;
-      ctx.fillStyle = color;
+    // Draw a 4-pointed star shape for night mode
+    const drawNightStar = (x, y, size, opacity) => {
+      ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
       ctx.beginPath();
       
-      // 4-pointed star shape
       const outerRadius = size;
       const innerRadius = size * 0.4;
       const spikes = 4;
@@ -55,20 +52,53 @@ const MinimalistPortfolio = () => {
       
       ctx.closePath();
       ctx.fill();
+      
+      // Add a subtle glow for larger stars
+      if (size > 2) {
+        ctx.shadowBlur = size * 2;
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
     };
 
-    class Star {
+    // Draw a circle for light mode
+    const drawDayCircle = (x, y, size, opacity) => {
+      ctx.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        // Much smaller, varying sizes (0.5-2px)
-        this.size = Math.random() * 1.5 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.08;
-        this.speedY = (Math.random() - 0.5) * 0.08;
-        // Lower opacity for subtlety
-        this.opacity = Math.random() * 0.4 + 0.2;
-        // Twinkle offset
+        
+        // Different size distributions for day/night
+        if (isDayTime) {
+          // Light mode: black circles with varying sizes (1-4px)
+          this.size = Math.random() * 3 + 1;
+          this.opacity = Math.random() * 0.15 + 0.05; // Very subtle
+        } else {
+          // Dark mode: realistic night sky with varied star sizes
+          // Most stars small, few large (realistic distribution)
+          const rand = Math.random();
+          if (rand < 0.7) {
+            this.size = Math.random() * 1.5 + 0.8; // Small stars (majority)
+          } else if (rand < 0.9) {
+            this.size = Math.random() * 2 + 2; // Medium stars
+          } else {
+            this.size = Math.random() * 2.5 + 3; // Bright stars (few)
+          }
+          this.opacity = Math.random() * 0.5 + 0.4;
+        }
+        
+        // Very slow drift
+        this.speedX = (Math.random() - 0.5) * 0.03;
+        this.speedY = (Math.random() - 0.5) * 0.03;
         this.twinkleOffset = Math.random() * Math.PI * 2;
+        this.twinkleSpeed = Math.random() * 0.002 + 0.001;
       }
 
       update(time) {
@@ -80,21 +110,30 @@ const MinimalistPortfolio = () => {
         if (this.y > canvas.height) this.y = 0;
         else if (this.y < 0) this.y = canvas.height;
         
-        // Subtle twinkle effect
-        this.currentOpacity = this.opacity * (0.7 + 0.3 * Math.sin(time * 0.001 + this.twinkleOffset));
+        // Twinkle effect (stronger for night mode)
+        if (!isDayTime) {
+          this.currentOpacity = this.opacity * (0.6 + 0.4 * Math.sin(time * this.twinkleSpeed + this.twinkleOffset));
+        } else {
+          this.currentOpacity = this.opacity;
+        }
       }
 
       draw() {
-        drawStar(this.x, this.y, this.size, this.currentOpacity || this.opacity, isDayTime);
+        if (isDayTime) {
+          drawDayCircle(this.x, this.y, this.size, this.currentOpacity || this.opacity);
+        } else {
+          drawNightStar(this.x, this.y, this.size, this.currentOpacity || this.opacity);
+        }
       }
     }
 
-    const initStars = () => {
+    const initParticles = () => {
       particles = [];
-      // Fewer, more subtle stars
-      const numberOfStars = Math.floor((canvas.width * canvas.height) / 20000);
-      for (let i = 0; i < numberOfStars; i++) {
-        particles.push(new Star());
+      // More spread out - realistic night sky density
+      const density = isDayTime ? 25000 : 15000;
+      const numberOfParticles = Math.floor((canvas.width * canvas.height) / density);
+      for (let i = 0; i < numberOfParticles; i++) {
+        particles.push(new Particle());
       }
     };
     
