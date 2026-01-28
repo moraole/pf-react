@@ -193,59 +193,59 @@ const MinimalistPortfolio = () => {
     >
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }} />
 
-      <div className="relative z-10 min-h-screen flex items-center justify-between px-16 py-12">
-        {/* Left side - Name */}
-        <div className="flex flex-col justify-center space-y-4">
+      <div className="relative z-10 min-h-screen flex flex-col lg:flex-row items-center lg:justify-between px-6 sm:px-10 lg:px-16 py-8 lg:py-12">
+        {/* Name Section */}
+        <div className="flex flex-col justify-center space-y-2 sm:space-y-4 mb-10 lg:mb-0 pt-8 lg:pt-0">
           <div
             style={{ 
               animation: reducedMotion ? 'none' : 'fadeInUp 0.8s ease-out backwards',
               fontFamily: fontFamily
             }}
           >
-            <h1 className={`text-9xl font-normal ${textColor} tracking-wider cursor-default select-none`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease' }}>
+            <h1 className={`text-5xl sm:text-7xl lg:text-9xl font-normal ${textColor} tracking-wider cursor-default select-none`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease' }}>
               ERICK
             </h1>
           </div>
           <div
-            className="ml-32"
+            className="ml-8 sm:ml-16 lg:ml-32"
             style={{ 
               animation: reducedMotion ? 'none' : 'fadeInUp 0.8s ease-out 0.15s backwards',
               fontFamily: fontFamily
             }}
           >
-            <h1 className={`text-9xl font-normal ${textColor} tracking-wider cursor-default select-none`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease' }}>
+            <h1 className={`text-5xl sm:text-7xl lg:text-9xl font-normal ${textColor} tracking-wider cursor-default select-none`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease' }}>
               MORA
             </h1>
           </div>
         </div>
 
-        {/* Right side - Projects */}
-        <div className="flex flex-col justify-center max-w-2xl" style={{ animation: reducedMotion ? 'none' : 'fadeIn 1s ease-out 0.6s backwards' }}>
-          <h2 className={`text-2xl font-normal ${textColor} mb-8`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>Work:</h2>
-          <div className="space-y-6">
+        {/* Projects Section */}
+        <div className="flex flex-col justify-center w-full lg:max-w-2xl" style={{ animation: reducedMotion ? 'none' : 'fadeIn 1s ease-out 0.6s backwards' }}>
+          <h2 className={`text-xl sm:text-2xl font-normal ${textColor} mb-6 sm:mb-8`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>Work:</h2>
+          <div className="space-y-4 sm:space-y-6">
             {projects.map((project, index) => (
               <div 
                 key={project.id} 
                 onClick={() => handleProjectClick(project)} 
-                className={`flex items-start gap-6 cursor-pointer group ${reducedMotion ? '' : 'transition-all duration-300 hover:translate-x-3'}`}
+                className={`flex items-start gap-3 sm:gap-6 cursor-pointer group ${reducedMotion ? '' : 'transition-all duration-300 hover:translate-x-3'}`}
                 tabIndex={0}
                 role="button"
                 onKeyPress={(e) => { if (e.key === 'Enter') handleProjectClick(project); }}
               >
-                <span className={`${textColorMuted} font-normal text-lg min-w-[3rem]`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>{String(index + 1).padStart(2, '0')}</span>
-                <div className="flex-1">
-                  <h3 className={`${textColor} text-xl font-normal group-hover:${textColorHover} ${reducedMotion ? '' : 'transition-colors duration-300'}`} style={{ fontFamily: fontFamily }}>{project.title}</h3>
+                <span className={`${textColorMuted} font-normal text-sm sm:text-lg min-w-[2rem] sm:min-w-[3rem]`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>{String(index + 1).padStart(2, '0')}</span>
+                <div className="flex-1 min-w-0">
+                  <h3 className={`${textColor} text-base sm:text-xl font-normal group-hover:${textColorHover} ${reducedMotion ? '' : 'transition-colors duration-300'} truncate sm:whitespace-normal`} style={{ fontFamily: fontFamily }}>{project.title}</h3>
                 </div>
-                <span className={`${textColorSubtle} font-normal text-lg`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>{project.year}</span>
+                <span className={`${textColorSubtle} font-normal text-sm sm:text-lg flex-shrink-0`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>{project.year}</span>
               </div>
             ))}
           </div>
 
-          <div className={`mt-12 pt-8 border-t ${isDayTime ? 'border-slate-300' : 'border-white/10'}`} style={{ transition: reducedMotion ? 'none' : 'border-color 2s ease' }}>
-            <p className={`${textColorMuted} text-sm mb-2`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>Seattle, WA</p>
+          <div className={`mt-8 sm:mt-12 pt-6 sm:pt-8 border-t ${isDayTime ? 'border-slate-300' : 'border-white/10'}`} style={{ transition: reducedMotion ? 'none' : 'border-color 2s ease' }}>
+            <p className={`${textColorMuted} text-xs sm:text-sm mb-2`} style={{ transition: reducedMotion ? 'none' : 'color 2s ease', fontFamily: fontFamily }}>Seattle, WA</p>
             <a 
               href="mailto:mora.o.erick@gmail.com" 
-              className={`${textColor} hover:${textColorHover} ${reducedMotion ? '' : 'transition-colors duration-300'} text-base`} 
+              className={`${textColor} hover:${textColorHover} ${reducedMotion ? '' : 'transition-colors duration-300'} text-sm sm:text-base`} 
               style={{ fontFamily: fontFamily }}
             >
               mora.o.erick@gmail.com
