@@ -25,21 +25,53 @@ const MinimalistPortfolio = () => {
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      // Reinitialize stars on resize to fill the new canvas area
+      initStars();
     };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+
+    // Draw a 4-pointed star shape
+    const drawStar = (x, y, size, opacity, isDayMode) => {
+      const color = isDayMode ? `rgba(0, 0, 0, ${opacity * 0.25})` : `rgba(255, 255, 255, ${opacity * 0.4})`;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      
+      // 4-pointed star shape
+      const outerRadius = size;
+      const innerRadius = size * 0.4;
+      const spikes = 4;
+      
+      for (let i = 0; i < spikes * 2; i++) {
+        const radius = i % 2 === 0 ? outerRadius : innerRadius;
+        const angle = (i * Math.PI) / spikes - Math.PI / 2;
+        const px = x + Math.cos(angle) * radius;
+        const py = y + Math.sin(angle) * radius;
+        
+        if (i === 0) {
+          ctx.moveTo(px, py);
+        } else {
+          ctx.lineTo(px, py);
+        }
+      }
+      
+      ctx.closePath();
+      ctx.fill();
+    };
 
     class Star {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 5 + 2; // Larger stars (2-7px)
-        this.speedX = (Math.random() - 0.5) * 0.15;
-        this.speedY = (Math.random() - 0.5) * 0.15;
-        this.opacity = Math.random() * 0.7 + 0.3;
+        // Much smaller, varying sizes (0.5-2px)
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.08;
+        this.speedY = (Math.random() - 0.5) * 0.08;
+        // Lower opacity for subtlety
+        this.opacity = Math.random() * 0.4 + 0.2;
+        // Twinkle offset
+        this.twinkleOffset = Math.random() * Math.PI * 2;
       }
 
-      update() {
+      update(time) {
         this.x += this.speedX;
         this.y += this.speedY;
 
@@ -47,38 +79,45 @@ const MinimalistPortfolio = () => {
         else if (this.x < 0) this.x = canvas.width;
         if (this.y > canvas.height) this.y = 0;
         else if (this.y < 0) this.y = canvas.height;
+        
+        // Subtle twinkle effect
+        this.currentOpacity = this.opacity * (0.7 + 0.3 * Math.sin(time * 0.001 + this.twinkleOffset));
       }
 
       draw() {
-        // Draw stars - black in day mode, white in night mode
-        const color = isDayTime ? `rgba(0, 0, 0, ${this.opacity * 0.6})` : `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        drawStar(this.x, this.y, this.size, this.currentOpacity || this.opacity, isDayTime);
       }
     }
 
     const initStars = () => {
       particles = [];
-      const numberOfStars = Math.floor((canvas.width * canvas.height) / 12000); // More stars
+      // Fewer, more subtle stars
+      const numberOfStars = Math.floor((canvas.width * canvas.height) / 20000);
       for (let i = 0; i < numberOfStars; i++) {
         particles.push(new Star());
       }
     };
+    
+    // Initial setup
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     initStars();
+    
+    window.addEventListener('resize', resizeCanvas);
 
-    const animate = () => {
+    let startTime = performance.now();
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach(particle => {
-        particle.update();
+        particle.update(elapsed);
         particle.draw();
       });
 
       animationFrameId = requestAnimationFrame(animate);
     };
-    animate();
+    animate(performance.now());
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
@@ -114,21 +153,6 @@ const MinimalistPortfolio = () => {
       style={{ transition: reducedMotion ? 'none' : 'background 2s ease' }}
     >
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }} />
-
-      {/* Moon (night time only) */}
-      <div 
-        className={`absolute top-20 right-32 w-48 h-48 rounded-full ${isDayTime ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
-        style={{ 
-          zIndex: 3,
-          transition: reducedMotion ? 'none' : 'all 2s ease',
-          boxShadow: '0 0 60px 30px rgba(255, 255, 255, 0.3), inset -10px -10px 30px rgba(0, 0, 0, 0.2)',
-          background: 'radial-gradient(circle at 30% 30%, #f8f9fa 0%, #e9ecef 40%, #adb5bd 100%)'
-        }}
-      >
-        <div className="absolute top-8 left-12 w-8 h-8 rounded-full bg-gray-400 opacity-30"></div>
-        <div className="absolute top-16 left-20 w-6 h-6 rounded-full bg-gray-400 opacity-20"></div>
-        <div className="absolute bottom-12 right-16 w-10 h-10 rounded-full bg-gray-400 opacity-25"></div>
-      </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-between px-16 py-12">
         {/* Left side - Name */}
