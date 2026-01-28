@@ -326,13 +326,13 @@ const MinimalistPortfolio = () => {
                       ))}
                     </div>
                   </section>
-                  <section>
+                  <section className="pb-8">
                     <h2 className={`text-xl sm:text-2xl lg:text-3xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-4 sm:mb-6`} style={{ fontFamily: fontFamily }}>Lessons Learned</h2>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {selectedProject.caseStudy.lessonsLearned.map((lesson, index) => (
-                        <div key={index} className={`flex items-start gap-3 p-4 ${isDayTime ? 'bg-blue-50' : 'bg-slate-700'} rounded-lg`}>
-                          <span className={`font-bold ${isDayTime ? 'text-blue-600' : 'text-blue-400'}`}>→</span>
-                          <p className={isDayTime ? 'text-slate-700' : 'text-slate-200'} style={{ fontFamily: fontFamily }}>{lesson}</p>
+                        <div key={index} className={`flex items-start gap-3 p-3 sm:p-4 ${isDayTime ? 'bg-blue-50' : 'bg-slate-700'} rounded-lg`}>
+                          <span className={`font-bold text-sm sm:text-base ${isDayTime ? 'text-blue-600' : 'text-blue-400'}`}>→</span>
+                          <p className={`text-sm sm:text-base ${isDayTime ? 'text-slate-700' : 'text-slate-200'}`} style={{ fontFamily: fontFamily }}>{lesson}</p>
                         </div>
                       ))}
                     </div>
