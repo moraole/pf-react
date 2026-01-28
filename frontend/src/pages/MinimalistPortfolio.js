@@ -140,7 +140,7 @@ const MinimalistPortfolio = () => {
     // Initial setup
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    initStars();
+    initParticles();
     
     window.addEventListener('resize', resizeCanvas);
 
