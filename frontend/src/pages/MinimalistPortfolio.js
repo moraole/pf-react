@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Github, Linkedin, User } from 'lucide-react';
 import { portfolioData } from '../mock';
 import { useAccessibility } from '../contexts/AccessibilityContext';
 
@@ -9,6 +9,8 @@ const MinimalistPortfolio = () => {
   const { reducedMotion, theme, fontSize, dyslexiaFont, enhancedFocus } = useAccessibility();
   const [selectedProject, setSelectedProject] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [isAboutClosing, setIsAboutClosing] = useState(false);
 
   const isDayTime = theme === 'light';
 
