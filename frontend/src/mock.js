@@ -243,7 +243,7 @@ export const portfolioData = {
       title: "CS Education Research & SITE 2023 Publication",
       year: "2022-2023",
       description: "Research project addressing the shortage of accessible video resources for K-12 CS pre-service teachers. Presented at WWU Scholar's Week 2022 and published at SITE 2023 International Conference with co-author Dr. Caroline Hardin.",
-      image: "https://mabel.wwu.edu/do/8ea58c91-0e29-4c74-82ca-32c768892833/file/a6d4bdfb-1cc6-46f6-b2ed-916ed418c418/download/MoraAlmedo_poster_TFS.png",
+      image: "",
       technologies: ["Research", "CS Education", "Technical Writing", "Academic Publication", "Data Analysis"],
       liveLink: "https://academicexperts.org/conf/site/2023/papers/62010/",
       githubLink: "#",
