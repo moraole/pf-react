@@ -181,6 +181,19 @@ const MinimalistPortfolio = () => {
     }, 400);
   };
 
+  const openAbout = () => {
+    setIsAboutClosing(false);
+    setShowAbout(true);
+  };
+
+  const closeAbout = () => {
+    setIsAboutClosing(true);
+    setTimeout(() => {
+      setShowAbout(false);
+      setIsAboutClosing(false);
+    }, 400);
+  };
+
   const textColor = isDayTime ? 'text-slate-900' : 'text-white';
   const textColorHover = isDayTime ? 'text-slate-700' : 'text-white/80';
   const textColorMuted = isDayTime ? 'text-slate-500' : 'text-white/50';
