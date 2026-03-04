@@ -386,10 +386,35 @@ const MinimalistPortfolio = () => {
             </button>
             <div className="px-5 sm:px-8 lg:px-12 py-6 sm:py-8 max-w-5xl mx-auto">
               <div className="mb-8 sm:mb-12">
-                <div className="flex items-center gap-4 mb-3 sm:mb-4">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
                   <span className={`${isDayTime ? 'text-slate-500' : 'text-slate-400'} font-mono text-xs sm:text-sm`}>{selectedProject.year}</span>
+                  {selectedProject.githubLink && selectedProject.githubLink !== '#' && (
+                    <a 
+                      href={selectedProject.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full ${isDayTime ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-slate-900 hover:bg-slate-100'} ${reducedMotion ? '' : 'transition-all duration-300 hover:scale-105'} text-xs sm:text-sm`}
+                      style={{ fontFamily: fontFamily }}
+                    >
+                      <Github size={16} />
+                      <span>View on GitHub</span>
+                    </a>
+                  )}
                 </div>
                 <h1 className={`text-2xl sm:text-4xl lg:text-5xl font-normal ${isDayTime ? 'text-slate-900' : 'text-white'} mb-4 sm:mb-6`} style={{ fontFamily: fontFamily }}>{selectedProject.title}</h1>
+                
+                {/* Project Screenshot */}
+                {selectedProject.image && (
+                  <div className="mb-6 sm:mb-8 rounded-lg overflow-hidden shadow-lg">
+                    <img 
+                      src={selectedProject.image} 
+                      alt={`${selectedProject.title} screenshot`}
+                      className="w-full h-auto object-cover"
+                      style={{ maxHeight: '400px', objectFit: 'contain', backgroundColor: isDayTime ? '#f1f5f9' : '#1e293b' }}
+                    />
+                  </div>
+                )}
+                
                 <p className={`text-base sm:text-lg lg:text-xl ${isDayTime ? 'text-slate-600' : 'text-slate-300'} leading-relaxed mb-6 sm:mb-8`} style={{ fontFamily: fontFamily }}>{selectedProject.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech, index) => (
