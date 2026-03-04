@@ -468,8 +468,12 @@ const MinimalistPortfolio = () => {
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         @keyframes slideDown { from { transform: translateY(0); } to { transform: translateY(100%); } }
+        @keyframes slideLeft { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        @keyframes slideRight { from { transform: translateX(0); } to { transform: translateX(100%); } }
         .animate-slideUp { animation: slideUp 0.4s ease-out; }
         .animate-slideDown { animation: slideDown 0.4s ease-out; }
+        .animate-slideLeft { animation: slideLeft 0.5s ease-out; }
+        .animate-slideRight { animation: slideRight 0.5s ease-out; }
         .cloud { position: absolute; background: rgba(255, 255, 255, 0.8); border-radius: 100px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
         .cloud::before, .cloud::after { content: ''; position: absolute; background: rgba(255, 255, 255, 0.8); border-radius: 100px; }
         .cloud1 { width: 120px; height: 50px; top: 15%; left: 10%; animation: float 40s infinite linear; }
