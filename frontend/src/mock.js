@@ -240,15 +240,75 @@ export const portfolioData = {
     },
     {
       id: 4,
-      title: "SITE 2023 Publication",
-      year: "2023",
-      description: "Research publication or project presented at SITE 2023. Contributed to academic research in software engineering, information technology, or education technology.",
+      title: "CS Education Research & SITE 2023 Publication",
+      year: "2022-2023",
+      description: "Research project addressing the shortage of accessible video resources for K-12 CS pre-service teachers. Presented at WWU Scholar's Week 2022 and published at SITE 2023 International Conference with co-author Dr. Caroline Hardin.",
       image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
-      technologies: ["Research", "Technical Writing", "Academic Publication"],
-      liveLink: "#",
+      technologies: ["Research", "CS Education", "Technical Writing", "Academic Publication", "Data Analysis"],
+      liveLink: "https://academicexperts.org/conf/site/2023/papers/62010/",
       githubLink: "#",
-      featured: false,
-      hasCaseStudy: false
+      featured: true,
+      hasCaseStudy: true,
+      caseStudy: {
+        challenge: "As Computer Science education continues to develop for K-12, pre-service teachers need accessible resources to learn effective teaching methods. Our research identified a critical problem: there is a significant shortage of video resources showing live CS lessons being taught in actual K-12 classroom environments. Pre-service teachers looking to reference classroom teaching methods had difficulty finding videos that demonstrated real-world instruction techniques, curriculum delivery, and student engagement strategies. We needed to document this gap and propose solutions to help future CS educators.",
+        solution: "Conducted comprehensive research surveying available video resources for K-12 CS education, analyzing their accessibility and pedagogical value. Collaborated with Dr. Caroline Hardin from Western Washington University's Computer Science department to investigate the shortage systematically. Documented findings showing that easily accessible videos of live classroom CS instruction were scarce, making it difficult for pre-service teachers to observe and learn from experienced educators. Developed recommendations for creating more accessible video resources and highlighted the importance of this content for teacher preparation programs.",
+        results: [
+          "Presented poster at WWU Scholar's Week in May 2022 at Carver Gym, Bellingham, WA",
+          "Paper accepted and presented at SITE 2023 International Conference",
+          "Published research available through Academic Experts conference proceedings",
+          "Identified critical gap in accessible K-12 CS teaching video resources",
+          "Provided recommendations for improving pre-service teacher preparation",
+          "Contributed to academic discourse on CS education methodology",
+          "Research cited in subsequent discussions about CS teacher training",
+          "Collaboration with Dr. Caroline Hardin demonstrated faculty-student research partnership"
+        ],
+        techStack: [
+          "Research Methodology: Systematic literature review, resource analysis, qualitative assessment",
+          "Data Collection: Survey of available video platforms (YouTube, educational repositories, university resources)",
+          "Analysis Tools: Content categorization, accessibility evaluation criteria",
+          "Academic Writing: IEEE/ACM conference paper formatting, academic citation standards",
+          "Presentation: Academic poster design for Scholar's Week, conference presentation slides",
+          "Collaboration: Faculty-student research partnership with Dr. Caroline Hardin",
+          "Publication: SITE (Society for Information Technology & Teacher Education) conference proceedings"
+        ],
+        timeline: [
+          { 
+            phase: "Research Initiation & Problem Identification",
+            duration: "Fall 2021 - Winter 2022",
+            details: "Identified the research problem while studying CS education methodologies at Western Washington University. Recognized that pre-service teachers lacked accessible video resources showing live K-12 CS classroom instruction. Partnered with Dr. Caroline Hardin to formalize the research project. Conducted initial surveys of available educational video resources across multiple platforms including YouTube, Khan Academy, Code.org, and university repositories. Developed research questions focusing on: What video resources exist? How accessible are they? What gaps exist for pre-service teachers?"
+          },
+          { 
+            phase: "Data Collection & Analysis",
+            duration: "Winter - Spring 2022",
+            details: "Systematically searched for videos showing live CS lessons in K-12 classroom environments. Categorized videos by: grade level (elementary, middle, high school), CS topic (programming, computational thinking, algorithms), production quality, accessibility (free vs. paid, platform availability), and pedagogical value. Discovered significant shortage of videos meeting criteria for useful pre-service teacher resources. Most available content was tutorial-style rather than actual classroom demonstrations. Documented findings with quantitative and qualitative analysis."
+          },
+          { 
+            phase: "WWU Scholar's Week Poster Presentation",
+            duration: "May 18-19, 2022",
+            details: "Designed academic poster highlighting research findings on the shortage of accessible CS teaching videos. Presented at Western Washington University's Scholar's Week event in Carver Gym, Bellingham, WA. Poster titled 'Using videos to teach K-12 CS pre-service teachers' showcased the problem, methodology, findings, and proposed solutions. Received feedback from faculty, students, and community members. Poster archived in WWU's MABEL digital repository (Identifier: 1772). This initial presentation validated research approach and generated interest for further publication."
+          },
+          { 
+            phase: "Paper Development & SITE Conference Submission",
+            duration: "Summer 2022 - Winter 2023",
+            details: "Expanded poster findings into full academic paper suitable for conference publication. Collaborated with Dr. Caroline Hardin on paper structure, literature review, and methodology sections. Submitted to SITE 2023 (Society for Information Technology & Teacher Education) International Conference. Paper underwent peer review process and was accepted for presentation. Refined paper based on reviewer feedback, strengthening arguments and adding additional context about the importance of video resources in teacher preparation."
+          },
+          { 
+            phase: "SITE 2023 International Conference Presentation",
+            duration: "March 2023",
+            details: "Presented research at SITE 2023 International Conference alongside Dr. Caroline Hardin. Shared findings with international audience of CS educators, researchers, and teacher preparation professionals. Engaged in discussions about solutions to the identified gap in resources. Paper published in conference proceedings and made available through Academic Experts (https://academicexperts.org/conf/site/2023/papers/62010/). Received positive feedback and contributed to ongoing conversations about improving CS teacher preparation."
+          }
+        ],
+        lessonsLearned: [
+          "Academic research process: Learned to conduct systematic research from problem identification through publication",
+          "Collaboration skills: Working with Dr. Caroline Hardin taught me how faculty-student research partnerships function",
+          "Academic writing: Developed skills in writing for peer-reviewed conferences with proper citations and formatting",
+          "Presentation skills: Poster presentations at Scholar's Week and conference talks require different approaches",
+          "Persistence in research: The journey from initial idea (2021) to publication (2023) taught patience and iteration",
+          "Impact of CS education research: Understanding that improving teacher resources directly impacts future student learning",
+          "Conference participation: Learned how academic conferences work, from submission to presentation to networking",
+          "Identifying real problems: Recognizing that my own experience as a CS student revealed gaps others also faced"
+        ]
+      }
     },
     {
       id: 5,
