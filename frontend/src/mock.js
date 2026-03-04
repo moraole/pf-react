@@ -315,7 +315,7 @@ export const portfolioData = {
       title: "Destiny 2 Assistant",
       year: "2024",
       description: "Tool to assist Destiny 2 players with checking in-game equipment for builds. Features OAuth authentication with Bungie API, real-time inventory tracking, and equipment comparison.",
-      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
+      image: "",
       technologies: ["React", "Express", "OAuth", "Bungie API", "Node.js"],
       liveLink: "#",
       githubLink: "https://github.com/moraole",
