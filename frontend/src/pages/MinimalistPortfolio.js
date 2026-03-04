@@ -265,9 +265,113 @@ const MinimalistPortfolio = () => {
             >
               mora.o.erick@gmail.com
             </a>
+            
+            {/* About Me Button */}
+            <button
+              onClick={openAbout}
+              className={`mt-4 flex items-center gap-2 ${textColorMuted} hover:${textColor} ${reducedMotion ? '' : 'transition-all duration-300'} text-sm sm:text-base group`}
+              style={{ fontFamily: fontFamily }}
+              data-testid="about-me-btn"
+            >
+              <User size={16} className={`${reducedMotion ? '' : 'group-hover:scale-110 transition-transform'}`} />
+              <span className={`${reducedMotion ? '' : 'group-hover:translate-x-1 transition-transform'}`}>About Me</span>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* About Me Section */}
+      {showAbout && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ animation: reducedMotion ? 'none' : 'fadeIn 0.3s ease-out' }}>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeAbout}></div>
+          <div className={`relative w-full h-full ${isDayTime ? 'bg-white text-slate-900' : 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white'} overflow-y-auto ${reducedMotion ? '' : (isAboutClosing ? 'animate-slideRight' : 'animate-slideLeft')}`}>
+            <button 
+              onClick={closeAbout} 
+              className={`fixed top-6 right-6 w-12 h-12 rounded-full ${isDayTime ? 'bg-slate-100 hover:bg-slate-200' : 'bg-slate-700 hover:bg-slate-600'} flex items-center justify-center ${reducedMotion ? '' : 'transition-colors duration-200'} z-20`}
+              aria-label="Close about section"
+            >
+              <X size={24} className={isDayTime ? 'text-slate-900' : 'text-white'} />
+            </button>
+            
+            <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-6 sm:px-12 lg:px-20 py-16 lg:py-12 gap-12 lg:gap-20">
+              {/* Left side - Name and intro */}
+              <div className="flex flex-col justify-center max-w-xl">
+                <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-normal ${textColor} mb-6`} style={{ fontFamily: fontFamily }}>
+                  About Me
+                </h1>
+                <p className={`text-base sm:text-lg ${isDayTime ? 'text-slate-600' : 'text-slate-300'} leading-relaxed mb-6`} style={{ fontFamily: fontFamily }}>
+                  I'm <span className="font-semibold">Erick Mora Olmedo</span>, a full-stack developer and researcher based in Seattle, WA. 
+                  I'm passionate about building innovative solutions that bridge the gap between technology and real-world problems.
+                </p>
+                <p className={`text-base sm:text-lg ${isDayTime ? 'text-slate-600' : 'text-slate-300'} leading-relaxed mb-6`} style={{ fontFamily: fontFamily }}>
+                  My journey spans from developing gaming analytics platforms to contributing to academic research in CS education. 
+                  I graduated from Western Washington University where I collaborated with faculty on research that was presented at international conferences.
+                </p>
+                <p className={`text-base sm:text-lg ${isDayTime ? 'text-slate-600' : 'text-slate-300'} leading-relaxed mb-8`} style={{ fontFamily: fontFamily }}>
+                  When I'm not coding, you'll find me exploring new technologies, playing competitive games, or working on projects that combine my love for data and user experience.
+                </p>
+                
+                {/* Social Links */}
+                <div className="flex items-center gap-6">
+                  <a 
+                    href="https://github.com/moraole" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-2 px-5 py-3 rounded-full ${isDayTime ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-slate-900 hover:bg-slate-100'} ${reducedMotion ? '' : 'transition-all duration-300 hover:scale-105'}`}
+                    style={{ fontFamily: fontFamily }}
+                  >
+                    <Github size={20} />
+                    <span>GitHub</span>
+                  </a>
+                  <a 
+                    href="https://www.linkedin.com/in/erickmoraolmedo/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-2 px-5 py-3 rounded-full ${isDayTime ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-400'} ${reducedMotion ? '' : 'transition-all duration-300 hover:scale-105'}`}
+                    style={{ fontFamily: fontFamily }}
+                  >
+                    <Linkedin size={20} />
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+              
+              {/* Right side - Skills/Highlights */}
+              <div className="flex flex-col justify-center max-w-md">
+                <h2 className={`text-2xl sm:text-3xl font-normal ${textColor} mb-6`} style={{ fontFamily: fontFamily }}>
+                  What I Do
+                </h2>
+                <div className="space-y-4">
+                  <div className={`p-4 rounded-lg ${isDayTime ? 'bg-slate-50' : 'bg-slate-800/50'}`}>
+                    <h3 className={`font-semibold ${textColor} mb-2`} style={{ fontFamily: fontFamily }}>Full-Stack Development</h3>
+                    <p className={`text-sm ${isDayTime ? 'text-slate-600' : 'text-slate-400'}`} style={{ fontFamily: fontFamily }}>
+                      Building scalable applications with React, Python, PostgreSQL, and modern web technologies.
+                    </p>
+                  </div>
+                  <div className={`p-4 rounded-lg ${isDayTime ? 'bg-slate-50' : 'bg-slate-800/50'}`}>
+                    <h3 className={`font-semibold ${textColor} mb-2`} style={{ fontFamily: fontFamily }}>Machine Learning</h3>
+                    <p className={`text-sm ${isDayTime ? 'text-slate-600' : 'text-slate-400'}`} style={{ fontFamily: fontFamily }}>
+                      Developing neural networks and ML models for text classification, image recognition, and data analysis.
+                    </p>
+                  </div>
+                  <div className={`p-4 rounded-lg ${isDayTime ? 'bg-slate-50' : 'bg-slate-800/50'}`}>
+                    <h3 className={`font-semibold ${textColor} mb-2`} style={{ fontFamily: fontFamily }}>API Integration</h3>
+                    <p className={`text-sm ${isDayTime ? 'text-slate-600' : 'text-slate-400'}`} style={{ fontFamily: fontFamily }}>
+                      Expertise in OAuth, REST APIs, and third-party integrations (Riot Games, Bungie, and more).
+                    </p>
+                  </div>
+                  <div className={`p-4 rounded-lg ${isDayTime ? 'bg-slate-50' : 'bg-slate-800/50'}`}>
+                    <h3 className={`font-semibold ${textColor} mb-2`} style={{ fontFamily: fontFamily }}>Research & Publication</h3>
+                    <p className={`text-sm ${isDayTime ? 'text-slate-600' : 'text-slate-400'}`} style={{ fontFamily: fontFamily }}>
+                      Published researcher in CS education, presented at SITE 2023 International Conference.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-end justify-center px-0 sm:px-[5%] lg:px-[7.5%]" style={{ animation: reducedMotion ? 'none' : 'fadeIn 0.3s ease-out' }}>
