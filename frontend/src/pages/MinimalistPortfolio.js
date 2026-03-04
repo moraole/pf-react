@@ -305,7 +305,7 @@ const MinimalistPortfolio = () => {
                 </p>
                 <p className={`text-base sm:text-lg ${isDayTime ? 'text-slate-600' : 'text-slate-300'} leading-relaxed mb-6`} style={{ fontFamily: fontFamily }}>
                   My journey spans from developing gaming analytics platforms to contributing to academic research in CS education. 
-                  I graduated from Western Washington University where I collaborated with faculty on research that was presented at international conferences.
+                  I studied Computer Science at Western Washington University from 2019-2023, where I collaborated with faculty on research that was presented at international conferences.
                 </p>
                 <p className={`text-base sm:text-lg ${isDayTime ? 'text-slate-600' : 'text-slate-300'} leading-relaxed mb-8`} style={{ fontFamily: fontFamily }}>
                   When I'm not coding, you'll find me exploring new technologies, playing competitive games, or working on projects that combine my love for data and user experience.
